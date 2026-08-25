@@ -2,12 +2,16 @@ LICENSE
 README.md
 pyproject.toml
 src/geoai2analytics/__init__.py
+src/geoai2analytics/audit.py
 src/geoai2analytics/autocorr.py
 src/geoai2analytics/cli.py
+src/geoai2analytics/clustering.py
+src/geoai2analytics/distribution.py
 src/geoai2analytics/econometrics.py
-src/geoai2analytics/geoai_xai.py
+src/geoai2analytics/ml.py
 src/geoai2analytics/py.typed
 src/geoai2analytics/weights.py
+src/geoai2analytics/xai.py
 src/geoai2analytics_sdk.egg-info/PKG-INFO
 src/geoai2analytics_sdk.egg-info/SOURCES.txt
 src/geoai2analytics_sdk.egg-info/dependency_links.txt
@@ -15,3 +19,4 @@ src/geoai2analytics_sdk.egg-info/entry_points.txt
 src/geoai2analytics_sdk.egg-info/requires.txt
 src/geoai2analytics_sdk.egg-info/top_level.txt
 tests/test_all_algorithms.py
+tests/test_master_suite.py
