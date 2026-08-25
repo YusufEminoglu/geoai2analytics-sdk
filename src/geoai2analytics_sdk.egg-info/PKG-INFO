@@ -1,0 +1,146 @@
+Metadata-Version: 2.4
+Name: geoai2analytics-sdk
+Version: 0.1.0
+Summary: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine.
+Author-email: Yusuf Eminoğlu <yusufeminoglu@gmail.com>
+License-Expression: MIT
+Project-URL: Homepage, https://github.com/YusufEminoglu/geoai2analytics-sdk
+Project-URL: Repository, https://github.com/YusufEminoglu/geoai2analytics-sdk
+Project-URL: Issues, https://github.com/YusufEminoglu/geoai2analytics-sdk/issues
+Project-URL: Documentation, https://yusufeminoglu.github.io/geoai2analytics-sdk/
+Project-URL: Changelog, https://github.com/YusufEminoglu/geoai2analytics-sdk/blob/main/CHANGELOG.md
+Keywords: spatial-statistics,spatial-econometrics,geoai,gwr,mgwr,lisa,morans-i,spatial-autocorrelation,shap,xai,conformal-prediction,spatial-weights,gis,urban-analytics
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Scientific/Engineering :: GIS
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy>=1.20.0
+Provides-Extra: geo
+Requires-Dist: scipy>=1.7.0; extra == "geo"
+Requires-Dist: shapely>=2.0.0; extra == "geo"
+Requires-Dist: geopandas>=0.12.0; extra == "geo"
+Requires-Dist: scikit-learn>=1.0.0; extra == "geo"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.0.0; extra == "dev"
+Requires-Dist: ruff>=0.1.0; extra == "dev"
+Requires-Dist: mypy>=1.0.0; extra == "dev"
+Requires-Dist: build>=1.0.0; extra == "dev"
+Requires-Dist: twine>=5.0.0; extra == "dev"
+Dynamic: license-file
+
+<div align="center">
+
+<a href="https://yusufeminoglu.github.io/geoai2analytics-sdk/">
+  <img src="https://raw.githubusercontent.com/YusufEminoglu/geoai2analytics-sdk/main/docs/icons/logo.svg" width="140" height="140" alt="geoai2analytics logo" />
+</a>
+
+# geoai2analytics-sdk
+
+[![CI](https://github.com/YusufEminoglu/geoai2analytics-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/YusufEminoglu/geoai2analytics-sdk/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/geoai2analytics-sdk.svg?color=10b981)](https://pypi.org/project/geoai2analytics-sdk/)
+[![Python version support](https://img.shields.io/pypi/pyversions/geoai2analytics-sdk.svg?color=3b82f6)](https://pypi.org/project/geoai2analytics-sdk/)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-06b6d4.svg)](https://yusufeminoglu.github.io/geoai2analytics-sdk/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-D7FF64.svg)](https://docs.astral.sh/ruff/)
+[![Test Coverage](https://img.shields.io/badge/coverage-86%25%2B-brightgreen.svg)](#-tests-and-quality-assurance)
+
+**Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine.**
+
+[📖 **Open Interactive Web Manual (GitHub Pages)**](https://yusufeminoglu.github.io/geoai2analytics-sdk/) • [📦 **PyPI Package**](https://pypi.org/project/geoai2analytics-sdk/) • [🐛 **Issue Tracker**](https://github.com/YusufEminoglu/geoai2analytics-sdk/issues)
+
+</div>
+
+---
+
+## 🌟 Overview
+
+**`geoai2analytics-sdk`** is a high-performance, pure-Python geospatial scientific engine designed for **Exploratory Spatial Data Analysis (ESDA)**, **Spatial Econometric Modeling**, and **Interpretable GeoAI (Explainable AI / XAI)**.
+
+Built entirely with standard scientific foundations (NumPy, SciPy), it executes advanced spatial autocorrelation, multiscale local regressions, and spatial machine learning attributions completely **headless**—ideal for Jupyter Notebooks, automated pipelines, GeoPandas workflows, and cloud-native spatial analytics.
+
+---
+
+## 🚀 Key Features & Capabilities
+
+### 1. Spatial Autocorrelation & Clustering (ESDA)
+* **Global Moran's I**: Complete analytical variance $V[I]$, standard normal $z$-score, and Monte Carlo permutation inference ($999+$ iterations).
+* **Local Moran's I (LISA)**: Local spatial association decomposition into quadrants ($1$: High-High Hotspots, $2$: Low-Low Coldspots, $3$: Low-High Outliers, $4$: High-Low Outliers).
+* **Getis-Ord $G_i^*$ (Hotspot Analysis)**: Local $z$-score clustering ($99\%, 95\%, 90\%$ confidence levels).
+* **Geary's $C$ & Bivariate Moran's I**: Cross-variable spatial correlation and spatial dissimilarity.
+* **Spatial Gini Inequality**: Rey's spatial concentration decomposition.
+
+### 2. Spatial Econometrics & Local Regressions
+* **Geographically Weighted Regression (GWR)**: Golden-section search bandwidth optimization, Gaussian/Bisquare/Exponential spatial kernels, local parameter estimates $\hat{\beta}_i$, local $t$-statistics, local $R_i^2$, and Hurvich AICc.
+* **Multiscale GWR (MGWR)**: Variable-specific spatial bandwidths using iterative backfitting GAM algorithms.
+* **Spatial Autoregressive Models (SAR / Spatial Lag)**: 2-Stage Least Squares (2SLS) estimation of spatial autoregressive parameter $\rho$.
+
+### 3. Explainable GeoAI (XAI) & Spatial Machine Learning
+* **Spatial SHAP (Shapley Additive Explanations)**: Model-agnostic Shapley feature attributions with continuous 2D geographic coordinate map decomposition.
+* **Spatial Cross-Validation (Spatial CV)**: Spatial $K$-Fold coordinate clustering to eliminate spatial autocorrelation data leakage.
+* **Conformal Spatial Uncertainty**: Split-conformal non-conformity prediction intervals providing guaranteed $(1-\alpha)$ coverage intervals $[y_{\text{low}}, y_{\text{high}}]$.
+
+---
+
+## 💻 Installation
+
+```bash
+pip install geoai2analytics-sdk
+```
+
+---
+
+## ⚡ Quickstart Example
+
+```python
+import numpy as np
+import geoai2analytics as geoai
+
+# 1. Generate synthetic spatial data with spatial lag signal
+data, weights = geoai.generate_synthetic_spatial_dataset(n=120)
+
+# 2. Test Global Spatial Autocorrelation
+moran = geoai.global_moran(data["y"], weights, permutations=999)
+print(f"Moran's I: {moran.I:.4f} | z-score: {moran.z_score:.2f} | p-value: {moran.p_sim:.4f}")
+
+# 3. Detect Local Hotspots (LISA)
+lisa = geoai.local_moran(data["y"], weights)
+print(f"High-High Hotspots: {lisa.high_high_count} | Low-Low Coldspots: {lisa.low_low_count}")
+
+# 4. Geographically Weighted Regression (GWR)
+coords = np.column_stack([data["x_coord"], data["y_coord"]])
+X = np.column_stack([data["X1"], data["X2"]])
+
+gwr = geoai.GWR(coords, data["y"], X, kernel="bisquare", adaptive=True)
+res = gwr.fit()
+print(f"Optimal Bandwidth: {res.bandwidth} | Global R²: {res.global_r2:.3f} | AICc: {res.aicc:.1f}")
+```
+
+---
+
+## 📄 License & Academic Citation
+
+Distributed under the **MIT License**.
+
+```bibtex
+@software{eminoglu2026geoai2analytics,
+  author    = {Emino{\u{g}}lu, Yusuf},
+  title     = {{geoai2analytics-sdk: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine}},
+  year      = {2026},
+  publisher = {PyPI - Python Package Index},
+  version   = {0.1.0},
+  url       = {https://github.com/YusufEminoglu/geoai2analytics-sdk}
+}
+```

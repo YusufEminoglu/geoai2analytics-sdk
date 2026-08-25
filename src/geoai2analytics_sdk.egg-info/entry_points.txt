@@ -1,0 +1,2 @@
+[console_scripts]
+geoai2analytics = geoai2analytics.cli:main
