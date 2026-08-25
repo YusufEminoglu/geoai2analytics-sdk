@@ -39,17 +39,12 @@
   </g>
 
   <!-- Glowing LISA Cluster Centroids -->
-  <!-- High-High (Hotspot - Top Right) -->
   <circle cx="352" cy="140" r="18" fill="#ef4444" stroke="#ffffff" stroke-width="3"/>
-  <!-- Low-Low (Coldspot - Bottom Left) -->
   <circle cx="180" cy="320" r="16" fill="#3b82f6" stroke="#ffffff" stroke-width="3"/>
-  <!-- Spatial Outliers -->
   <circle cx="160" cy="160" r="14" fill="#06b6d4" stroke="#ffffff" stroke-width="3"/>
   <circle cx="332" cy="310" r="14" fill="#f59e0b" stroke="#ffffff" stroke-width="3"/>
-  <!-- Central GeoAI Hub -->
   <circle cx="256" cy="240" r="22" fill="#10b981" stroke="#ffffff" stroke-width="4"/>
 
-  <!-- Badge -->
   <rect x="146" y="405" width="220" height="42" rx="21" fill="#0b1320" stroke="url(#glow)" stroke-width="3"/>
   <text x="256" y="432" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-size="16" font-weight="800" fill="#34d399" text-anchor="middle" letter-spacing="1.5">GEOAI &#183; ANALYTICS</text>
 </svg>

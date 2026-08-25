@@ -27,7 +27,6 @@
 
   <rect width="1120" height="380" rx="20" fill="url(#heroBg)" stroke="#1e293b" stroke-width="2"/>
 
-  <!-- Top Title Bar -->
   <text x="44" y="48" font-family="'Plus Jakarta Sans', Inter, sans-serif" font-size="22" font-weight="800" fill="#ffffff" letter-spacing="-0.01em">Pure-Python Spatial Statistics, Econometrics &amp; Explainable GeoAI</text>
   <text x="44" y="74" font-family="'Fira Code', monospace" font-size="13" fill="#94a3b8">ESDA (Moran / LISA) &#183; Spatial Econometrics (GWR / MGWR / SAR) &#183; Interpretable GeoAI (Spatial SHAP)</text>
 
@@ -37,20 +36,16 @@
     <text x="20" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#38bdf8">1. Spatial Autocorrelation</text>
     <text x="20" y="52" font-family="Inter, sans-serif" font-size="12" fill="#64748b">Global Moran's I &amp; LISA Clusters</text>
 
-    <!-- Axes -->
     <line x1="30" y1="140" x2="290" y2="140" stroke="#334155" stroke-width="1.5"/>
     <line x1="160" y1="65" x2="160" y2="215" stroke="#334155" stroke-width="1.5"/>
 
-    <!-- Quadrant Labels -->
     <text x="220" y="85" font-family="'Fira Code', monospace" font-size="10.5" fill="#ef4444" font-weight="700">High-High</text>
     <text x="45" y="200" font-family="'Fira Code', monospace" font-size="10.5" fill="#3b82f6" font-weight="700">Low-Low</text>
     <text x="45" y="85" font-family="'Fira Code', monospace" font-size="10.5" fill="#06b6d4">Low-High</text>
     <text x="220" y="200" font-family="'Fira Code', monospace" font-size="10.5" fill="#f59e0b">High-Low</text>
 
-    <!-- Moran Trend Line -->
     <line x1="60" y1="195" x2="260" y2="85" stroke="#10b981" stroke-width="2.5" stroke-dasharray="4 3"/>
 
-    <!-- Scatter Points -->
     <circle cx="230" cy="95" r="6" fill="#ef4444"><animate attributeName="r" values="6;8;6" dur="3s" repeatCount="indefinite"/></circle>
     <circle cx="250" cy="110" r="5" fill="#ef4444"/>
     <circle cx="215" cy="115" r="5" fill="#ef4444"/>
@@ -69,15 +64,12 @@
     <text x="20" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#34d399">2. Spatial Econometrics</text>
     <text x="20" y="52" font-family="Inter, sans-serif" font-size="12" fill="#64748b">GWR &amp; Multiscale MGWR Kernels</text>
 
-    <!-- Kernel Weighting Bell Curve -->
     <path d="M 30 190 Q 90 190 120 160 Q 160 70 160 70 Q 160 70 200 160 Q 230 190 290 190 Z" fill="url(#kernelGrad)"/>
     <path d="M 30 190 Q 90 190 120 160 Q 160 70 160 70 Q 160 70 200 160 Q 230 190 290 190" fill="none" stroke="#06b6d4" stroke-width="3"/>
 
-    <!-- Center Bandwidth Marker -->
     <line x1="160" y1="65" x2="160" y2="195" stroke="#10b981" stroke-width="2" stroke-dasharray="3 3"/>
     <circle cx="160" cy="70" r="6" fill="#10b981" filter="url(#glowPulse)"/>
 
-    <!-- Kernel Formula Label -->
     <text x="160" y="125" font-family="'Fira Code', monospace" font-size="11" fill="#e2e8f0" text-anchor="middle">w_ij = exp(-d_ij&#178; / b&#178;)</text>
     <text x="160" y="145" font-family="Inter, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Golden Section AICc Search</text>
 
@@ -90,7 +82,6 @@
     <text x="20" y="32" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#a78bfa">3. Explainable GeoAI (XAI)</text>
     <text x="20" y="52" font-family="Inter, sans-serif" font-size="12" fill="#64748b">Spatial SHAP &amp; Conformal Coverage</text>
 
-    <!-- Geographic Attribution Heatmap Grid -->
     <g transform="translate(30, 70)" stroke="#1e293b" stroke-width="1">
       <rect x="0" y="0" width="60" height="35" fill="#3b82f6" opacity="0.6"/>
       <rect x="65" y="0" width="60" height="35" fill="#06b6d4" opacity="0.7"/>
