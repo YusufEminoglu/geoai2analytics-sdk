@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta property="og:title" content="geoai2analytics — Pure-Python Spatial Statistics, Econometrics & Explainable GeoAI Manual">
-<meta property="og:description" content="Pure-Python Spatial Statistics, Econometrics (GWR/MGWR/SAR), and Explainable GeoAI (Spatial SHAP) Engine.">
-<meta property="og:url" content="https://yusufeminoglu.github.io/geoai2analytics-sdk/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="author" content="Yusuf Eminoğlu">
-<meta name="keywords" content="geoai, spatial-statistics, spatial-econometrics, morans-i, lisa, gwr, mgwr, shap, xai, explainable-ai, conformal-prediction, spatial-autocorrelation, spatial-analysis, urban-analytics, geospatial, machine-learning, gis, python, pypi, spatial-weights">
-<meta charset="UTF-8">
-<meta name="description" content="Pure-Python Spatial Statistics, Econometrics (GWR/MGWR/SAR), and Explainable GeoAI (Spatial SHAP) Engine.">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>geoai2analytics — Pure-Python Spatial Statistics, Econometrics & Explainable GeoAI Reference Manual</title>
@@ -860,14 +851,12 @@ print(f"Optimal Bandwidth: {res.bandwidth} nearest neighbors | Global R²: {res.
     ⚡ Live Interactive ESDA Sandbox
   </div>
   <h3 style="margin-top:0;font-size:1.35rem;color:#ffffff;">Global Moran's I &amp; LISA Quadrant Canvas Simulator</h3>
-  <p style="font-size:0.88rem;color:#94a3b8;margin-bottom:18px;">Adjust spatial autocorrelation strength ($
-ho$), sample size ($N$), and spatial connectivity to simulate live Moran scatterplot distributions:</p>
+  <p style="font-size:0.88rem;color:#94a3b8;margin-bottom:18px;">Adjust spatial autocorrelation strength ($ho$), sample size ($N$), and spatial connectivity to simulate live Moran scatterplot distributions:</p>
 
   <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:20px;">
     <div>
       <div style="margin-bottom:12px;">
-        <label style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;color:#cbd5e1;margin-bottom:4px;">Spatial Autocorrelation ($
-ho$): <span id="rhoVal" style="color:#10b981;">+0.75</span></label>
+        <label style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:600;color:#cbd5e1;margin-bottom:4px;">Spatial Autocorrelation ($ho$): <span id="rhoVal" style="color:#10b981;">+0.75</span></label>
         <input type="range" id="simRho" min="-0.90" max="0.95" step="0.05" value="0.75" style="width:100%;">
       </div>
       <div style="margin-bottom:12px;">
