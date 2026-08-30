@@ -4,12 +4,20 @@ pyproject.toml
 src/geoai2analytics/__init__.py
 src/geoai2analytics/audit.py
 src/geoai2analytics/autocorr.py
+src/geoai2analytics/causal.py
 src/geoai2analytics/cli.py
 src/geoai2analytics/clustering.py
 src/geoai2analytics/distribution.py
 src/geoai2analytics/econometrics.py
+src/geoai2analytics/extreme_value.py
 src/geoai2analytics/ml.py
+src/geoai2analytics/network_stats.py
 src/geoai2analytics/py.typed
+src/geoai2analytics/spacetime.py
+src/geoai2analytics/spatial_abm.py
+src/geoai2analytics/spatial_conformal.py
+src/geoai2analytics/spatial_interaction.py
+src/geoai2analytics/spatial_markov.py
 src/geoai2analytics/weights.py
 src/geoai2analytics/xai.py
 src/geoai2analytics_sdk.egg-info/PKG-INFO
@@ -20,3 +28,6 @@ src/geoai2analytics_sdk.egg-info/requires.txt
 src/geoai2analytics_sdk.egg-info/top_level.txt
 tests/test_all_algorithms.py
 tests/test_master_suite.py
+tests/test_round4.py
+tests/test_rounds2_and_3.py
+tests/test_spacetime_and_causal.py

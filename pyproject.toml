@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "geoai2analytics-sdk"
-version = "0.2.0"
+name = "geoai2analytics"
+version = "0.8.0"
 authors = [
     { name = "Yusuf Eminoğlu", email = "yusufeminoglu@gmail.com" }
 ]
-description = "Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine."
+description = "Pure-Python Spatial Statistics, Econometrics, Ripley's K & Continuous Gravity Accessibility Suite."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"

@@ -5,9 +5,14 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.2.0"
+__version__ = "0.8.0"
 __author__ = "Yusuf Eminoğlu"
 
+from .accessibility_isochrone_gravity import (
+    DistanceDecayType,
+    GravityAccessibilityReport,
+    compute_gravity_accessibility_matrix,
+)
 from .audit import (
     AuditIssue,
     DataReadinessReport,
@@ -42,6 +47,17 @@ from .autocorr import (
     local_getis_ord_gi_star,
     local_moran,
     spatial_gini,
+)
+from .causal import (
+    SDIDResult,
+    SPSMMatchPair,
+    SPSMResult,
+    spatial_difference_in_differences,
+    spatial_propensity_score_matching,
+)
+from .cellular_automata_growth import (
+    UrbanCAGrowthResult,
+    simulate_urban_growth_ca,
 )
 from .clustering import (
     SKATERResult,
@@ -85,6 +101,62 @@ from .econometrics import (
     fit_spatial_lag,
     fit_spatial_regime,
     lagrange_multiplier_diagnostics,
+)
+from .extreme_value import (
+    GEVFitResult,
+    spatial_gev_fit,
+    spatial_return_period_map,
+)
+from .geographically_weighted_glm import (
+    GWGLMResult,
+    fit_gw_poisson_regression,
+)
+from .network_stats import (
+    NetKDEResult,
+    network_cross_k_function,
+    network_kernel_density_estimation,
+)
+from .ripleys_k_cross_function import (
+    RipleysKCrossResult,
+    calculate_ripleys_k_bivariate,
+)
+from .spatial_abm import (
+    EpidemicSpreadResult,
+    SpatialSEIRSimulator,
+)
+from .spatial_conformal import (
+    ConformalCoverageReport,
+    ConformalInterval,
+    calibrate_spatial_conformal,
+)
+from .spatial_density_dbscan import (
+    SpatialClusterResult,
+    cluster_spatial_points_dbscan,
+)
+from .spatial_hedonic_pricing import (
+    HedonicValuationResult,
+    fit_spatial_hedonic_model,
+)
+from .spatial_interaction import (
+    HuffModelResult,
+    ReillyResult,
+    WilsonFlowResult,
+    huff_model,
+    reilly_law_breaking_point,
+    wilson_spatial_interaction,
+)
+from .spatial_markov import (
+    SpatialMarkovResult,
+    simulate_landuse_transition,
+)
+from .spacetime import (
+    EmergingHotspotResult,
+    MannKendallResult,
+    SpaceTimeAnalysisResult,
+    SpaceTimeCube,
+    emerging_hotspot_analysis,
+    mann_kendall_test,
+    spatiotemporal_moran,
 )
 from .ml import (
     ExplainableBoostingRegressor,
@@ -241,5 +313,62 @@ __all__ = [
     "SimilarityMatch",
     "audit_spatial_data",
     "similarity_search",
-    "generate_synthetic_spatial_dataset",
+    # Spatio-Temporal & Emerging Hotspots
+    "SpaceTimeCube",
+    "emerging_hotspot_analysis",
+    "mann_kendall_test",
+    "spatiotemporal_moran",
+    "MannKendallResult",
+    "EmergingHotspotResult",
+    "SpaceTimeAnalysisResult",
+    # Spatial Causal Inference
+    "spatial_propensity_score_matching",
+    "spatial_difference_in_differences",
+    "SPSMResult",
+    "SPSMMatchPair",
+    "SDIDResult",
+    # Spatial Interaction & Gravity Models
+    "huff_model",
+    "reilly_law_breaking_point",
+    "wilson_spatial_interaction",
+    "HuffModelResult",
+    "ReillyResult",
+    "WilsonFlowResult",
+    # Extreme Value Risk
+    "spatial_gev_fit",
+    "spatial_return_period_map",
+    "GEVFitResult",
+    # NetKDE & Network Stats
+    "network_kernel_density_estimation",
+    "network_cross_k_function",
+    "NetKDEResult",
+    # Spatial ABM & SEIR
+    "SpatialSEIRSimulator",
+    "EpidemicSpreadResult",
+    # Spatial Markov Chains
+    "simulate_landuse_transition",
+    "SpatialMarkovResult",
+    # Spatial Conformal Prediction
+    "calibrate_spatial_conformal",
+    "ConformalCoverageReport",
+    "ConformalInterval",
+    # Geographically Weighted GLM (Poisson / Logistic)
+    "fit_gw_poisson_regression",
+    "GWGLMResult",
+    # Directional Anisotropic Spatial DBSCAN
+    "cluster_spatial_points_dbscan",
+    "SpatialClusterResult",
+    # Spatial Hedonic Real Estate Valuation
+    "fit_spatial_hedonic_model",
+    "HedonicValuationResult",
+    # SLEUTH-style Urban Sprawl Cellular Automata
+    "simulate_urban_growth_ca",
+    "UrbanCAGrowthResult",
+    # Bivariate Ripley's K Point Pattern Cross-Function
+    "calculate_ripleys_k_bivariate",
+    "RipleysKCrossResult",
+    # Continuous Gravity Accessibility Potential
+    "compute_gravity_accessibility_matrix",
+    "GravityAccessibilityReport",
+    "DistanceDecayType",
 ]

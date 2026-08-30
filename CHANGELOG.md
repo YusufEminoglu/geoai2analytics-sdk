@@ -1,9 +1,47 @@
 # Changelog
 
-All notable changes to **`geoai2analytics-sdk`** will be documented in this file.
+All notable changes to this project will be documented in this file.
+
+## [0.8.0] - 2026-08-30
+### Added
+- **Bivariate Ripley's K Point Pattern Cross-Function (`ripleys_k_cross_function.py`)**: Added `calculate_ripleys_k_bivariate` and Besag L transform testing spatial co-location attraction vs repulsion.
+- **Continuous Gravity Accessibility Potential Engine (`accessibility_isochrone_gravity.py`)**: Added `compute_gravity_accessibility_matrix` supporting Exponential, Gaussian, and Power distance decay models.
+
+## [0.7.0] - 2026-08-30
+### Added
+- **Spatial Hedonic Real Estate Valuation Engine (`spatial_hedonic_pricing.py`)**: Added `fit_spatial_hedonic_model` modeling SAR spatial autocorrelation, structural attributes, and amenity elasticities.
+- **SLEUTH-style Urban Sprawl Growth Cellular Automata (`cellular_automata_growth.py`)**: Added `simulate_urban_growth_ca` simulating diffusion, breed, spread, and road-influenced urban expansion.
+
+## [0.6.0] - 2026-08-30
+### Added
+- **Geographically Weighted GLM (GW-GLM Poisson & Logistic) (`geographically_weighted_glm.py`)**: Added `fit_gw_poisson_regression` with spatial distance kernel weighting, local McFadden pseudo-$R^2$, and AICc optimization.
+- **Directional Anisotropic Spatial DBSCAN (`spatial_density_dbscan.py`)**: Added `cluster_spatial_points_dbscan` supporting directional elliptical spatial density distance metrics.
+
+## [0.5.0] - 2026-08-30
+### Added
+- **Spatial Markov Chains & Cellular Transition Engine (`spatial_markov.py`)**: Added `simulate_landuse_transition` with spatial lag neighborhood conditional transition matrices, ergodic steady state distributions, and chi-square spatial independence tests.
+- **Spatial Conformal Prediction & Uncertainty Quantification (`spatial_conformal.py`)**: Added `calibrate_spatial_conformal` producing distribution-free finite-sample valid prediction intervals.
+
+## [0.4.0] - 2026-08-30
+### Added
+- **Spatial Interaction & Gravity Model Suite (`spatial_interaction.py`)**: Added `huff_model`, `reilly_law_breaking_point`, and `wilson_spatial_interaction` (doubly-constrained entropy-maximizing matrix).
+- **Spatial Extreme Value & Return Period Risk Engine (`extreme_value.py`)**: Added L-moment `spatial_gev_fit` and `spatial_return_period_map` (10, 50, 100, 500-year return level estimation).
+- **Network-Constrained Spatial Statistics (`network_stats.py`)**: Added `network_kernel_density_estimation` (Equal Split continuous NetKDE) and `network_cross_k_function`.
+- **Spatially Explicit SEIR Epidemic & Hazard Diffusion Simulator (`spatial_abm.py`)**: Added multi-zone agent-based SEIR model (`SpatialSEIRSimulator`).
+
+## [0.3.0] - 2026-08-30
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+### Added
+- **Spatio-Temporal Autocorrelation & Space-Time Emerging Hotspots (`spacetime.py`)**:
+  - `SpaceTimeCube`: Multi-period 3D space-time grid container.
+  - `emerging_hotspot_analysis`: Full ESRI-compatible space-time pattern classification (New Hotspot, Consecutive Hotspot, Intensifying Hotspot, Persistent Hotspot, Sporadic Hotspot, Oscillating Hotspot, Diminishing Hotspot, Historical Hotspot) using local Getis-Ord Gi* across time slices and the Mann-Kendall non-parametric trend test (`mann_kendall_test`) with Sen's slope estimator.
+  - `spatiotemporal_moran`: Space-time joint autocorrelation estimator with space-time lag matrix product.
+- **Spatial Causal Inference & Propensity Score Matching (`causal.py`)**:
+  - `spatial_propensity_score_matching` (SPSM): Propensity score estimation combined with spatial distance caliper penalties to eliminate geographic selection bias, computing ATT and covariate balance improvements.
+  - `spatial_difference_in_differences` (SDID): Spatial DiD with autoregressive spatial spillover lag ($W \Delta y$), computing direct treatment effect, indirect spillover effect, and robust standard errors.
 
 ## [0.2.0] - 2026-08-26
 

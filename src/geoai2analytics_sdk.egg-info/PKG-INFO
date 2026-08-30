@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: geoai2analytics-sdk
-Version: 0.2.0
-Summary: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine.
+Version: 0.5.0
+Summary: Pure-Python Spatial Analytics, Econometrics, GEV Risk, NetKDE, Spatial Markov & Conformal Prediction.
 Author-email: Yusuf Eminoğlu <yusufeminoglu@gmail.com>
 License-Expression: MIT
 Project-URL: Homepage, https://github.com/YusufEminoglu/geoai2analytics-sdk
