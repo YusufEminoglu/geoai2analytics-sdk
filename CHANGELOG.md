@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.0] - 2026-08-30
+### Added
+- **Spatial Autoregressive Deep Surrogate & Geo-Embeddings (`spatial_lag_deep_surrogate.py`)**: Added `fit_spatial_autoregressive_surrogate` combining spatial lag weight matrices with deep neural embeddings.
+- **Inhomogeneous Poisson Point Process Adaptive Intensity (`point_process_k_nearest_intensity.py`)**: Added `estimate_inhomogeneous_intensity` computing variable-bandwidth adaptive point pattern intensities.
+
 ## [0.9.0] - 2026-08-30
 ### Added
 - **Hierarchical Density-Based Spatial Clustering (`spatial_hdbscan_clustering.py`)**: Added `cluster_spatial_hdbscan` using Mutual Reachability Distance graphs and Minimum Spanning Trees without arbitrary radius parameters.

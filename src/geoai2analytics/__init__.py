@@ -5,13 +5,23 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.9.0"
+__version__ = "0.10.0"
 __author__ = "Yusuf Eminoğlu"
 
 from .accessibility_isochrone_gravity import (
     DistanceDecayType,
     GravityAccessibilityReport,
     compute_gravity_accessibility_matrix,
+)
+from .point_process_k_nearest_intensity import (
+    PointProcessIntensityResult,
+    SpatialBandwidthProfile,
+    estimate_inhomogeneous_intensity,
+)
+from .spatial_lag_deep_surrogate import (
+    SpatialEmbeddingMatrix,
+    SpatialSurrogateResult,
+    fit_spatial_autoregressive_surrogate,
 )
 from .audit import (
     AuditIssue,
@@ -389,4 +399,12 @@ __all__ = [
     "calculate_spatial_information_entropy",
     "SpatialEntropyReport",
     "ScaleEntropyProfile",
+    # Spatial Autoregressive Deep Surrogate & Geo-Embeddings
+    "fit_spatial_autoregressive_surrogate",
+    "SpatialSurrogateResult",
+    "SpatialEmbeddingMatrix",
+    # Inhomogeneous Poisson Point Process Adaptive Intensity
+    "estimate_inhomogeneous_intensity",
+    "PointProcessIntensityResult",
+    "SpatialBandwidthProfile",
 ]
