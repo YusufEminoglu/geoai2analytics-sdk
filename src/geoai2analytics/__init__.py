@@ -5,7 +5,7 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.10.0"
+__version__ = "0.11.0"
 __author__ = "Yusuf Eminoğlu"
 
 from .accessibility_isochrone_gravity import (
@@ -18,10 +18,20 @@ from .point_process_k_nearest_intensity import (
     SpatialBandwidthProfile,
     estimate_inhomogeneous_intensity,
 )
+from .spatial_causal_counterfactual_shap import (
+    FeatureShapAttribution,
+    SpatialShapleyReport,
+    explain_spatial_counterfactual_shap,
+)
 from .spatial_lag_deep_surrogate import (
     SpatialEmbeddingMatrix,
     SpatialSurrogateResult,
     fit_spatial_autoregressive_surrogate,
+)
+from .spatiotemporal_lstm_diffusion import (
+    GraphAdjacencyMatrix,
+    STDiffusionResult,
+    predict_spatiotemporal_flow,
 )
 from .audit import (
     AuditIssue,
@@ -407,4 +417,12 @@ __all__ = [
     "estimate_inhomogeneous_intensity",
     "PointProcessIntensityResult",
     "SpatialBandwidthProfile",
+    # Spatio-Temporal Graph Diffusion Flow Predictor
+    "predict_spatiotemporal_flow",
+    "STDiffusionResult",
+    "GraphAdjacencyMatrix",
+    # Spatial Causal Counterfactual SHAP Attribution
+    "explain_spatial_counterfactual_shap",
+    "SpatialShapleyReport",
+    "FeatureShapAttribution",
 ]

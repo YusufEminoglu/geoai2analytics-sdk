@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.11.0] - 2026-08-30
+### Added
+- **Spatio-Temporal Graph Diffusion & Flow Predictor (`spatiotemporal_lstm_diffusion.py`)**: Added `predict_spatiotemporal_flow` combining normalized graph Laplacians with temporal recurrence.
+- **Spatial Counterfactual & Location-Aware SHAP Attribution Explainer (`spatial_causal_counterfactual_shap.py`)**: Added `explain_spatial_counterfactual_shap` decomposing Shapley feature attributions and recommending counterfactual location shifts.
+
 ## [0.10.0] - 2026-08-30
 ### Added
 - **Spatial Autoregressive Deep Surrogate & Geo-Embeddings (`spatial_lag_deep_surrogate.py`)**: Added `fit_spatial_autoregressive_surrogate` combining spatial lag weight matrices with deep neural embeddings.
