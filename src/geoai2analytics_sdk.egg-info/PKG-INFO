@@ -1,7 +1,7 @@
 Metadata-Version: 2.4
 Name: geoai2analytics-sdk
-Version: 0.11.0
-Summary: Pure-Python Spatial Statistics, Econometrics, ST Graph Diffusion & Spatial Causal SHAP Suite.
+Version: 0.12.0
+Summary: Pure-Python Spatial Statistics, Econometrics, ST Kriging & Spatial Isolation Forest Suite.
 Author-email: Yusuf Eminoğlu <yusufeminoglu@gmail.com>
 License-Expression: MIT
 Project-URL: Homepage, https://github.com/YusufEminoglu/geoai2analytics-sdk

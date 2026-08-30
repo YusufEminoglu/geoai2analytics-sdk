@@ -5,7 +5,7 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.11.0"
+__version__ = "0.12.0"
 __author__ = "Yusuf Eminoğlu"
 
 from .accessibility_isochrone_gravity import (
@@ -23,10 +23,20 @@ from .spatial_causal_counterfactual_shap import (
     SpatialShapleyReport,
     explain_spatial_counterfactual_shap,
 )
+from .spatial_density_anomaly_isolation import (
+    SpatialAnomalyReport,
+    SpatialIsolationForestConfig,
+    detect_spatial_density_anomalies,
+)
 from .spatial_lag_deep_surrogate import (
     SpatialEmbeddingMatrix,
     SpatialSurrogateResult,
     fit_spatial_autoregressive_surrogate,
+)
+from .spatiotemporal_kriging_variogram import (
+    STKrigingResult,
+    STVariogramParams,
+    interpolate_spatiotemporal_kriging,
 )
 from .spatiotemporal_lstm_diffusion import (
     GraphAdjacencyMatrix,
@@ -425,4 +435,12 @@ __all__ = [
     "explain_spatial_counterfactual_shap",
     "SpatialShapleyReport",
     "FeatureShapAttribution",
+    # Spatio-Temporal Product-Sum Kriging
+    "interpolate_spatiotemporal_kriging",
+    "STKrigingResult",
+    "STVariogramParams",
+    # Spatial Density Isolation Forest Outlier Detector
+    "detect_spatial_density_anomalies",
+    "SpatialAnomalyReport",
+    "SpatialIsolationForestConfig",
 ]

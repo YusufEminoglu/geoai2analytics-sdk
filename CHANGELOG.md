@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.0] - 2026-08-30
+### Added
+- **Spatio-Temporal Variogram & 3D Product-Sum Kriging Interpolator (`spatiotemporal_kriging_variogram.py`)**: Added `interpolate_spatiotemporal_kriging` solving space-time non-separable covariance kriging systems.
+- **Spatial Density-Aware Isolation Forest Anomaly Detector (`spatial_density_anomaly_isolation.py`)**: Added `detect_spatial_density_anomalies` detecting isolated spatial outliers with kernel bandwidth scaling.
+
 ## [0.11.0] - 2026-08-30
 ### Added
 - **Spatio-Temporal Graph Diffusion & Flow Predictor (`spatiotemporal_lstm_diffusion.py`)**: Added `predict_spatiotemporal_flow` combining normalized graph Laplacians with temporal recurrence.

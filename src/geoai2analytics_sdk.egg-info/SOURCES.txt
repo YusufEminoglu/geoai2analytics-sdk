@@ -23,12 +23,14 @@ src/geoai2analytics/spacetime.py
 src/geoai2analytics/spatial_abm.py
 src/geoai2analytics/spatial_causal_counterfactual_shap.py
 src/geoai2analytics/spatial_conformal.py
+src/geoai2analytics/spatial_density_anomaly_isolation.py
 src/geoai2analytics/spatial_density_dbscan.py
 src/geoai2analytics/spatial_hdbscan_clustering.py
 src/geoai2analytics/spatial_hedonic_pricing.py
 src/geoai2analytics/spatial_interaction.py
 src/geoai2analytics/spatial_lag_deep_surrogate.py
 src/geoai2analytics/spatial_markov.py
+src/geoai2analytics/spatiotemporal_kriging_variogram.py
 src/geoai2analytics/spatiotemporal_lstm_diffusion.py
 src/geoai2analytics/weights.py
 src/geoai2analytics/xai.py
@@ -41,6 +43,7 @@ src/geoai2analytics_sdk.egg-info/top_level.txt
 tests/test_all_algorithms.py
 tests/test_master_suite.py
 tests/test_round10.py
+tests/test_round11.py
 tests/test_round4.py
 tests/test_round5.py
 tests/test_round6.py
