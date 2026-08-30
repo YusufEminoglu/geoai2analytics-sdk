@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "geoai2analytics"
-version = "0.8.0"
+version = "0.9.0"
 authors = [
     { name = "Yusuf Eminoğlu", email = "yusufeminoglu@gmail.com" }
 ]
-description = "Pure-Python Spatial Statistics, Econometrics, Ripley's K & Continuous Gravity Accessibility Suite."
+description = "Pure-Python Spatial Statistics, Econometrics, HDBSCAN Clustering & Multi-Scale Spatial Entropy Suite."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.0] - 2026-08-30
+### Added
+- **Hierarchical Density-Based Spatial Clustering (`spatial_hdbscan_clustering.py`)**: Added `cluster_spatial_hdbscan` using Mutual Reachability Distance graphs and Minimum Spanning Trees without arbitrary radius parameters.
+- **Multi-Scale Spatial Information Entropy (`multiscale_spatial_entropy.py`)**: Added `calculate_spatial_information_entropy` evaluating Batty & Shannon spatial disorder across hierarchical grid scales.
+
 ## [0.8.0] - 2026-08-30
 ### Added
 - **Bivariate Ripley's K Point Pattern Cross-Function (`ripleys_k_cross_function.py`)**: Added `calculate_ripleys_k_bivariate` and Besag L transform testing spatial co-location attraction vs repulsion.

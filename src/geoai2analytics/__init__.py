@@ -5,7 +5,7 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.8.0"
+__version__ = "0.9.0"
 __author__ = "Yusuf Eminoğlu"
 
 from .accessibility_isochrone_gravity import (
@@ -111,6 +111,11 @@ from .geographically_weighted_glm import (
     GWGLMResult,
     fit_gw_poisson_regression,
 )
+from .multiscale_spatial_entropy import (
+    ScaleEntropyProfile,
+    SpatialEntropyReport,
+    calculate_spatial_information_entropy,
+)
 from .network_stats import (
     NetKDEResult,
     network_cross_k_function,
@@ -132,6 +137,11 @@ from .spatial_conformal import (
 from .spatial_density_dbscan import (
     SpatialClusterResult,
     cluster_spatial_points_dbscan,
+)
+from .spatial_hdbscan_clustering import (
+    ClusterCondensedTree,
+    HDBSCANResult,
+    cluster_spatial_hdbscan,
 )
 from .spatial_hedonic_pricing import (
     HedonicValuationResult,
@@ -371,4 +381,12 @@ __all__ = [
     "compute_gravity_accessibility_matrix",
     "GravityAccessibilityReport",
     "DistanceDecayType",
+    # Hierarchical Density-Based Spatial Clustering (Spatial HDBSCAN)
+    "cluster_spatial_hdbscan",
+    "HDBSCANResult",
+    "ClusterCondensedTree",
+    # Multi-Scale Spatial Information Entropy & Sprawl Dispersion
+    "calculate_spatial_information_entropy",
+    "SpatialEntropyReport",
+    "ScaleEntropyProfile",
 ]
