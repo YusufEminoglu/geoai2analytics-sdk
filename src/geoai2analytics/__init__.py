@@ -5,7 +5,7 @@ geoai2analytics — Pure-Python Spatial Statistics, Econometrics, and Explainabl
 
 from __future__ import annotations
 
-__version__ = "0.12.0"
+__version__ = "0.12.1"
 __author__ = "Yusuf Eminoğlu"
 
 from .accessibility_isochrone_gravity import (
