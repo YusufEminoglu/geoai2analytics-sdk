@@ -67,11 +67,11 @@ dev = [
 geoai2analytics = "geoai2analytics.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/YusufEminoglu/geoai2analytics-sdk"
-Repository = "https://github.com/YusufEminoglu/geoai2analytics-sdk"
-Issues = "https://github.com/YusufEminoglu/geoai2analytics-sdk/issues"
-Documentation = "https://yusufeminoglu.github.io/geoai2analytics-sdk/"
-Changelog = "https://github.com/YusufEminoglu/geoai2analytics-sdk/blob/main/CHANGELOG.md"
+Homepage = "https://geophilo.com/"
+Repository = "https://gitlab.com/geospacephilo/geoai2analytics-sdk"
+Issues = "https://gitlab.com/geospacephilo/geoai2analytics-sdk/-/issues"
+Documentation = "https://geophilo.com/"
+Changelog = "https://gitlab.com/geospacephilo/geoai2analytics-sdk/-/blob/main/CHANGELOG.md"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

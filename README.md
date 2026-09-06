@@ -6,17 +6,17 @@
 
 <div align="center">
 
-[![CI](https://github.com/YusufEminoglu/geoai2analytics-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/YusufEminoglu/geoai2analytics-sdk/actions/workflows/ci.yml)
+[![CI](https://gitlab.com/geospacephilo/geoai2analytics-sdk/actions/workflows/ci.yml/badge.svg)](https://gitlab.com/geospacephilo/geoai2analytics-sdk/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/geoai2analytics-sdk.svg?color=10b981)](https://pypi.org/project/geoai2analytics-sdk/)
 [![Python version support](https://img.shields.io/pypi/pyversions/geoai2analytics-sdk.svg?color=3b82f6)](https://pypi.org/project/geoai2analytics-sdk/)
-[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-06b6d4.svg)](https://yusufeminoglu.github.io/geoai2analytics-sdk/)
+[![Documentation](https://img.shields.io/badge/docs-GitLab%20Pages-06b6d4.svg)](https://yusufeminoglu.github.io/geoai2analytics-sdk/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-D7FF64.svg)](https://docs.astral.sh/ruff/)
 [![Test Coverage](https://img.shields.io/badge/coverage-86%25%2B-brightgreen.svg)](#-tests-and-quality-assurance)
 
 **Pure-Python Spatial Statistics, Spatial Econometrics, and Explainable GeoAI Engine.**
 
-[📖 **Open Interactive Web Manual (GitHub Pages)**](https://yusufeminoglu.github.io/geoai2analytics-sdk/) • [📦 **PyPI Package**](https://pypi.org/project/geoai2analytics-sdk/) • [🐛 **Issue Tracker**](https://github.com/YusufEminoglu/geoai2analytics-sdk/issues)
+[📖 **Open Interactive Web Manual (GitLab Pages)**](https://yusufeminoglu.github.io/geoai2analytics-sdk/) • [📦 **PyPI Package**](https://pypi.org/project/geoai2analytics-sdk/) • [🐛 **Issue Tracker**](https://gitlab.com/geospacephilo/geoai2analytics-sdk/-/issues)
 
 </div>
 
@@ -125,6 +125,6 @@ Distributed under the **MIT License**.
   year      = {2026},
   publisher = {PyPI - Python Package Index},
   version   = {0.1.0},
-  url       = {https://github.com/YusufEminoglu/geoai2analytics-sdk}
+  url       = {https://gitlab.com/geospacephilo/geoai2analytics-sdk}
 }
 ```
