@@ -6,10 +6,10 @@ from __future__ import annotations
 import unittest
 
 from geoai2analytics import (
-    STKrigingResult,
-    STVariogramParams,
     SpatialAnomalyReport,
     SpatialIsolationForestConfig,
+    STKrigingResult,
+    STVariogramParams,
     detect_spatial_density_anomalies,
     interpolate_spatiotemporal_kriging,
 )

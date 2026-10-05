@@ -67,23 +67,23 @@ class SpatialSEIRSimulator:
         """Run day-by-day spatial ODE/difference step simulation."""
         S = self.populations.copy()
         E = np.zeros(self.n_zones)
-        I = np.zeros(self.n_zones)
+        I_inf = np.zeros(self.n_zones)
         R = np.zeros(self.n_zones)
 
         init_z = max(0, min(self.n_zones - 1, initial_infected_zone))
-        I[init_z] = min(S[init_z], float(initial_infected_count))
-        S[init_z] -= I[init_z]
+        I_inf[init_z] = min(S[init_z], float(initial_infected_count))
+        S[init_z] -= I_inf[init_z]
 
         s_hist, e_hist, i_hist, r_hist = [], [], [], []
 
-        for day in range(days):
+        for _day in range(days):
             s_hist.append(int(np.sum(S)))
             e_hist.append(int(np.sum(E)))
-            i_hist.append(int(np.sum(I)))
+            i_hist.append(int(np.sum(I_inf)))
             r_hist.append(int(np.sum(R)))
 
             # Effective infectious force including mobile contacts
-            effective_I = I + np.dot(self.mobility_matrix, I)
+            effective_I = I_inf + np.dot(self.mobility_matrix, I_inf)
 
             new_exposed = (self.beta * S * effective_I) / np.maximum(1.0, self.populations)
             new_exposed = np.minimum(S, new_exposed)
@@ -91,12 +91,12 @@ class SpatialSEIRSimulator:
             new_infectious = self.sigma * E
             new_infectious = np.minimum(E, new_infectious)
 
-            new_recovered = self.gamma * I
-            new_recovered = np.minimum(I, new_recovered)
+            new_recovered = self.gamma * I_inf
+            new_recovered = np.minimum(I_inf, new_recovered)
 
             S -= new_exposed
             E += new_exposed - new_infectious
-            I += new_infectious - new_recovered
+            I_inf += new_infectious - new_recovered
             R += new_recovered
 
         peak_day = int(np.argmax(i_hist))

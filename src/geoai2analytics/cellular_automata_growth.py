@@ -3,9 +3,9 @@
 
 from __future__ import annotations
 
-import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
+
 import numpy as np
 
 
@@ -53,7 +53,7 @@ def simulate_urban_growth_ca(
 
     curr_grid = grid.copy()
 
-    for step in range(steps):
+    for _step in range(steps):
         next_grid = curr_grid.copy()
 
         # Count 8-neighborhood urban neighbors

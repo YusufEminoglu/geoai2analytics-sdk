@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 
@@ -40,7 +40,7 @@ def cluster_spatial_hdbscan(
     min_samples: int | None = None,
 ) -> HDBSCANResult:
     """Perform hierarchical density-based spatial clustering without requiring a predefined global epsilon.
-    
+
     Implements Mutual Reachability Distance (MRD) graph and minimum spanning tree hierarchical extraction.
     """
     pts = list(coordinates)
@@ -134,7 +134,7 @@ def cluster_spatial_hdbscan(
     cluster_sizes: dict[int, int] = {}
     noise_count = 0
 
-    for root, members in components.items():
+    for members in components.values():
         if len(members) >= min_cluster_size:
             for m in members:
                 labels[m] = cluster_id

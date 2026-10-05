@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 
@@ -38,7 +38,7 @@ def calculate_spatial_information_entropy(
     scale_grid_resolutions_m: Sequence[float] = (100.0, 250.0, 500.0, 1000.0),
 ) -> SpatialEntropyReport:
     """Compute Batty & Shannon multi-scale spatial information entropy across hierarchical grid tessellations.
-    
+
     Formula:
     H = - sum_i (p_i * ln(p_i)) where p_i = n_i / N
     H_max = ln(K) where K = number of occupied / total cells

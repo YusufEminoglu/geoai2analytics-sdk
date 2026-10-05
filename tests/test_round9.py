@@ -7,7 +7,6 @@ import unittest
 
 from geoai2analytics import (
     PointProcessIntensityResult,
-    SpatialEmbeddingMatrix,
     SpatialSurrogateResult,
     estimate_inhomogeneous_intensity,
     fit_spatial_autoregressive_surrogate,

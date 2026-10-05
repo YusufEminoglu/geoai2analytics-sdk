@@ -4,16 +4,17 @@
 from __future__ import annotations
 
 import unittest
+
 import numpy as np
 
 from geoai2analytics import (
     SpaceTimeCube,
     emerging_hotspot_analysis,
-    mann_kendall_test,
-    spatiotemporal_moran,
-    spatial_propensity_score_matching,
-    spatial_difference_in_differences,
     knn_weights,
+    mann_kendall_test,
+    spatial_difference_in_differences,
+    spatial_propensity_score_matching,
+    spatiotemporal_moran,
 )
 
 

@@ -13,36 +13,6 @@ from .accessibility_isochrone_gravity import (
     GravityAccessibilityReport,
     compute_gravity_accessibility_matrix,
 )
-from .point_process_k_nearest_intensity import (
-    PointProcessIntensityResult,
-    SpatialBandwidthProfile,
-    estimate_inhomogeneous_intensity,
-)
-from .spatial_causal_counterfactual_shap import (
-    FeatureShapAttribution,
-    SpatialShapleyReport,
-    explain_spatial_counterfactual_shap,
-)
-from .spatial_density_anomaly_isolation import (
-    SpatialAnomalyReport,
-    SpatialIsolationForestConfig,
-    detect_spatial_density_anomalies,
-)
-from .spatial_lag_deep_surrogate import (
-    SpatialEmbeddingMatrix,
-    SpatialSurrogateResult,
-    fit_spatial_autoregressive_surrogate,
-)
-from .spatiotemporal_kriging_variogram import (
-    STKrigingResult,
-    STVariogramParams,
-    interpolate_spatiotemporal_kriging,
-)
-from .spatiotemporal_lstm_diffusion import (
-    GraphAdjacencyMatrix,
-    STDiffusionResult,
-    predict_spatiotemporal_flow,
-)
 from .audit import (
     AuditIssue,
     DataReadinessReport,
@@ -141,6 +111,13 @@ from .geographically_weighted_glm import (
     GWGLMResult,
     fit_gw_poisson_regression,
 )
+from .ml import (
+    ExplainableBoostingRegressor,
+    MLComparisonTable,
+    SpatialModelMetrics,
+    SpatialRandomForestRegressor,
+    compare_spatial_models,
+)
 from .multiscale_spatial_entropy import (
     ScaleEntropyProfile,
     SpatialEntropyReport,
@@ -151,18 +128,42 @@ from .network_stats import (
     network_cross_k_function,
     network_kernel_density_estimation,
 )
+from .point_process_k_nearest_intensity import (
+    PointProcessIntensityResult,
+    SpatialBandwidthProfile,
+    estimate_inhomogeneous_intensity,
+)
 from .ripleys_k_cross_function import (
     RipleysKCrossResult,
     calculate_ripleys_k_bivariate,
+)
+from .spacetime import (
+    EmergingHotspotResult,
+    MannKendallResult,
+    SpaceTimeAnalysisResult,
+    SpaceTimeCube,
+    emerging_hotspot_analysis,
+    mann_kendall_test,
+    spatiotemporal_moran,
 )
 from .spatial_abm import (
     EpidemicSpreadResult,
     SpatialSEIRSimulator,
 )
+from .spatial_causal_counterfactual_shap import (
+    FeatureShapAttribution,
+    SpatialShapleyReport,
+    explain_spatial_counterfactual_shap,
+)
 from .spatial_conformal import (
     ConformalCoverageReport,
     ConformalInterval,
     calibrate_spatial_conformal,
+)
+from .spatial_density_anomaly_isolation import (
+    SpatialAnomalyReport,
+    SpatialIsolationForestConfig,
+    detect_spatial_density_anomalies,
 )
 from .spatial_density_dbscan import (
     SpatialClusterResult,
@@ -185,25 +186,24 @@ from .spatial_interaction import (
     reilly_law_breaking_point,
     wilson_spatial_interaction,
 )
+from .spatial_lag_deep_surrogate import (
+    SpatialEmbeddingMatrix,
+    SpatialSurrogateResult,
+    fit_spatial_autoregressive_surrogate,
+)
 from .spatial_markov import (
     SpatialMarkovResult,
     simulate_landuse_transition,
 )
-from .spacetime import (
-    EmergingHotspotResult,
-    MannKendallResult,
-    SpaceTimeAnalysisResult,
-    SpaceTimeCube,
-    emerging_hotspot_analysis,
-    mann_kendall_test,
-    spatiotemporal_moran,
+from .spatiotemporal_kriging_variogram import (
+    STKrigingResult,
+    STVariogramParams,
+    interpolate_spatiotemporal_kriging,
 )
-from .ml import (
-    ExplainableBoostingRegressor,
-    MLComparisonTable,
-    SpatialModelMetrics,
-    SpatialRandomForestRegressor,
-    compare_spatial_models,
+from .spatiotemporal_lstm_diffusion import (
+    GraphAdjacencyMatrix,
+    STDiffusionResult,
+    predict_spatiotemporal_flow,
 )
 from .weights import (
     SpatialWeights,

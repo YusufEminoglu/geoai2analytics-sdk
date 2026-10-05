@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 
@@ -67,7 +67,7 @@ def predict_spatiotemporal_flow(
     forecasts: list[list[float]] = []
 
     current_state = list(last_state)
-    for h in range(forecast_horizon_steps):
+    for _h in range(forecast_horizon_steps):
         next_step: list[float] = []
         for i in range(num_nodes):
             # 1st order diffusion: sum_j A_ij * current_state[j]

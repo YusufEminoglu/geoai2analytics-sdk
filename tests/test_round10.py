@@ -6,9 +6,8 @@ from __future__ import annotations
 import unittest
 
 from geoai2analytics import (
-    FeatureShapAttribution,
-    STDiffusionResult,
     SpatialShapleyReport,
+    STDiffusionResult,
     explain_spatial_counterfactual_shap,
     predict_spatiotemporal_flow,
 )

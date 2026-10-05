@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 import numpy as np
@@ -38,7 +38,7 @@ def simulate_landuse_transition(
     class_names: Sequence[str] | None = None,
 ) -> SpatialMarkovResult:
     """Compute global and spatially conditioned Markov transition probability matrices."""
-    unique_states = sorted(list(set(list(states_t0) + list(states_t1))))
+    unique_states = sorted(set(list(states_t0) + list(states_t1)))
     k = len(unique_states)
     state_to_idx = {st: i for i, st in enumerate(unique_states)}
     labels = [str(c) for c in (class_names if class_names else unique_states)]

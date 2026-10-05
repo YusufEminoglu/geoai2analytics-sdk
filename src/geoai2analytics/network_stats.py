@@ -92,7 +92,7 @@ def network_cross_k_function(
     n_a = len(pts_a)
     n_b = len(pts_b)
     if n_a == 0 or n_b == 0:
-        return {r: 0.0 for r in distances}
+        return dict.fromkeys(distances, 0.0)
 
     k_vals: dict[float, float] = {}
     for r in distances:

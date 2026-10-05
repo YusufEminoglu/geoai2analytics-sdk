@@ -4,12 +4,12 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 import numpy as np
 
-from .weights import SpatialWeights, knn_weights
+from .weights import SpatialWeights
 
 
 @dataclass
@@ -254,7 +254,7 @@ def spatial_difference_in_differences(
     except Exception:
         beta = np.zeros(3)
 
-    beta0, direct_att, rho = beta[0], beta[1], beta[2]
+    _, direct_att, rho = beta[0], beta[1], beta[2]
 
     # Spillover effect: average spatial indirect effect
     spillover_att = float(rho * direct_att)

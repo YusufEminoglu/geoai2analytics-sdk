@@ -118,11 +118,11 @@ def wilson_spatial_interaction(
 
     T_{ij} = A_i * B_j * O_i * D_j * exp(-\beta * c_{ij})
     """
-    O = np.asarray(origins_supply, dtype=float)
+    O_supply = np.asarray(origins_supply, dtype=float)
     D = np.asarray(destinations_demand, dtype=float)
     C = np.asarray(cost_matrix, dtype=float)
 
-    n_orig, n_dest = len(O), len(D)
+    n_orig, n_dest = len(O_supply), len(D)
     f_mat = np.exp(-beta * C)
 
     A = np.ones(n_orig)
@@ -135,14 +135,14 @@ def wilson_spatial_interaction(
         A = 1.0 / np.maximum(1e-9, denom_A)
 
         # Update B_j = 1 / \sum_i (A_i * O_i * f_{ij})
-        denom_B = np.dot(f_mat.T, A * O)
+        denom_B = np.dot(f_mat.T, A * O_supply)
         B = 1.0 / np.maximum(1e-9, denom_B)
 
         if np.max(np.abs(A - A_old)) < tol:
             break
 
     # Flow matrix T_{ij} = A_i * O_i * B_j * D_j * f_{ij}
-    T_mat = (A * O)[:, None] * (B * D)[None, :] * f_mat
+    T_mat = (A * O_supply)[:, None] * (B * D)[None, :] * f_mat
 
     return WilsonFlowResult(
         flow_matrix=T_mat.tolist(),

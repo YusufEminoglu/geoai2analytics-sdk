@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 
@@ -39,7 +39,7 @@ def estimate_inhomogeneous_intensity(
     study_area_km2: float | None = None,
 ) -> PointProcessIntensityResult:
     """Compute variable bandwidth adaptive spatial point process intensity using k-th nearest neighbor distance.
-    
+
     Formula:
     lambda_hat(x_i) = (k - 1) / (pi * d_k(x_i)^2)
     """

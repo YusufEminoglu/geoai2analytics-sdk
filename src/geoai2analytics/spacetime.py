@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 import numpy as np
@@ -164,7 +164,7 @@ def spatiotemporal_moran(
     if spatial_weights is None:
         spatial_weights = knn_weights(cube.coords, k=min(6, cube.n_locations - 1))
 
-    N, T = cube.n_locations, cube.n_time_steps
+    _, T = cube.n_locations, cube.n_time_steps
     flat_y = cube.data.flatten()
     mean_y = np.mean(flat_y)
     z = flat_y - mean_y

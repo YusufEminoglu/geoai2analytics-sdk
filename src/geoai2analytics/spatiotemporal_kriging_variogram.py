@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Sequence
 
 
@@ -53,7 +53,7 @@ def interpolate_spatiotemporal_kriging(
     weights: list[float] = []
     tot_weight = 0.0
 
-    for x, y, t, v in pts:
+    for x, y, t, _v in pts:
         h_s = math.hypot(x - tx, y - ty)
         h_t = abs(t - tt)
 
