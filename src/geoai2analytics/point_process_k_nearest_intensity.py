@@ -25,6 +25,7 @@ class PointProcessIntensityResult:
     bandwidth_profiles: list[SpatialBandwidthProfile]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return event counts and intensity statistics as a dictionary."""
         return {
             "events_count": self.total_events_count,
             "mean_intensity": round(self.mean_intensity_per_km2, 2),
@@ -64,7 +65,7 @@ def estimate_inhomogeneous_intensity(
 
         # Intensity per km^2: d_k in meters -> d_k_km = d_k / 1000
         d_k_km = d_k / 1000.0
-        lam = (k - 1) / (math.pi * (d_k_km ** 2)) if k > 1 else (1.0 / (math.pi * (d_k_km ** 2)))
+        lam = (k - 1) / (math.pi * (d_k_km**2)) if k > 1 else (1.0 / (math.pi * (d_k_km**2)))
         intensities.append(lam)
 
         profiles.append(

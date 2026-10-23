@@ -1,5 +1,6 @@
 [build-system]
-requires = ["setuptools>=61.0.0", "wheel"]
+# setuptools>=77 is required for the PEP 639 SPDX ``license = "MIT"`` string below.
+requires = ["setuptools>=77.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -44,10 +45,14 @@ classifiers = [
     "Intended Audience :: Science/Research",
 ]
 dependencies = [
-    "numpy>=1.20.0",
+    # numpy>=1.22 is required for the ``method=`` keyword of np.quantile.
+    "numpy>=1.22.0",
 ]
 
 [project.optional-dependencies]
+# Optional companion stack for GeoPandas/Shapely interoperability and
+# SciPy/scikit-learn-based downstream modelling. The core library itself
+# only imports NumPy and the Python standard library.
 geo = [
     "scipy>=1.7.0",
     "shapely>=2.0.0",

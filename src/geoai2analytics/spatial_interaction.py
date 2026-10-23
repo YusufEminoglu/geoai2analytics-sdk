@@ -19,6 +19,7 @@ class HuffModelResult:
     origin_total_demand: list[float]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return market dimensions and expected patron counts as a dictionary."""
         return {
             "n_origins": len(self.probabilities),
             "n_destinations": len(self.expected_patrons_by_destination),
@@ -71,7 +72,7 @@ def huff_model(
             dx, dy = destination_coords[j]
             dist = max(10.0, math.hypot(ox - dx, oy - dy))  # Min distance 10m
             s_j = max(1.0, destination_attractiveness[j])
-            u_ij = s_j / (dist ** distance_decay_exponent)
+            u_ij = s_j / (dist**distance_decay_exponent)
             utilities.append(u_ij)
 
         sum_u = sum(utilities)

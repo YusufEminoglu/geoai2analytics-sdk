@@ -34,7 +34,7 @@ class TestSpaceTimeAndCausal(unittest.TestCase):
         self.cube = SpaceTimeCube(
             coords=self.coords,
             time_series_matrix=self.st_matrix,
-            time_labels=[f"Year_{2018+t}" for t in range(self.n_time)],
+            time_labels=[f"Year_{2018 + t}" for t in range(self.n_time)],
         )
 
     def test_mann_kendall_test(self) -> None:

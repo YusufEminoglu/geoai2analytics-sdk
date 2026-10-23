@@ -19,7 +19,9 @@ class TestGeoAi2AnalyticsRound4(unittest.TestCase):
         t1 = [0, 1, 1, 2, 2, 2, 0, 1, 1, 0]
         lags = [0, 0, 1, 1, 2, 2, 0, 1, 2, 0]
 
-        res = simulate_landuse_transition(t0, t1, spatial_lag_states_t0=lags, class_names=["Forest", "Urban", "Agri"])
+        res = simulate_landuse_transition(
+            t0, t1, spatial_lag_states_t0=lags, class_names=["Forest", "Urban", "Agri"]
+        )
         self.assertIsInstance(res, SpatialMarkovResult)
         self.assertEqual(res.num_classes, 3)
         self.assertEqual(len(res.global_transition_matrix), 3)

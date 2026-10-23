@@ -20,6 +20,7 @@ class HedonicValuationResult:
     amenity_elasticities: dict[str, float]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return goodness-of-fit, intercept, and coefficients as a dictionary."""
         return {
             "r_squared": round(self.r_squared, 3),
             "adjusted_r2": round(self.adjusted_r2, 3),

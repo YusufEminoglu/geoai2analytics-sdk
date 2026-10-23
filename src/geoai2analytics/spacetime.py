@@ -30,7 +30,9 @@ class MannKendallResult:
 class EmergingHotspotResult:
     """Classification of spatio-temporal hotspot patterns over time."""
 
-    pattern_type: str  # 'New Hotspot', 'Intensifying Hotspot', 'Persistent Hotspot', 'Sporadic Hotspot', etc.
+    pattern_type: (
+        str  # 'New Hotspot', 'Intensifying Hotspot', 'Persistent Hotspot', 'Sporadic Hotspot', etc.
+    )
     gi_z_series: list[float]
     gi_p_series: list[float]
     mann_kendall: MannKendallResult
@@ -49,6 +51,7 @@ class SpaceTimeAnalysisResult:
     global_spacetime_moran_i: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return the space-time pattern summary and per-location trends."""
         return {
             "n_locations": self.n_locations,
             "n_time_steps": self.n_time_steps,
@@ -94,7 +97,7 @@ class SpaceTimeCube:
         self.time_labels = (
             list(time_labels)
             if time_labels is not None
-            else [f"T{t+1}" for t in range(self.n_time_steps)]
+            else [f"T{t + 1}" for t in range(self.n_time_steps)]
         )
 
 
@@ -104,7 +107,13 @@ def mann_kendall_test(series: Sequence[float] | np.ndarray) -> MannKendallResult
     n = len(arr)
     if n < 3:
         return MannKendallResult(
-            tau=0.0, s_stat=0.0, var_s=1.0, z_score=0.0, p_value=1.0, trend="no trend", sen_slope=0.0
+            tau=0.0,
+            s_stat=0.0,
+            var_s=1.0,
+            z_score=0.0,
+            p_value=1.0,
+            trend="no trend",
+            sen_slope=0.0,
         )
 
     # Compute S statistic
@@ -234,7 +243,7 @@ def emerging_hotspot_analysis(
         if recent_hot:
             if not prior_hot and T > 1:
                 pattern = "New Hotspot"
-            elif all(is_hot[-max(2, T // 3):]):
+            elif all(is_hot[-max(2, T // 3) :]):
                 if mk.trend == "increasing":
                     pattern = "Intensifying Hotspot"
                 elif hot_ratio >= 0.90:
@@ -248,7 +257,7 @@ def emerging_hotspot_analysis(
         elif recent_cold:
             if not prior_cold and T > 1:
                 pattern = "New Coldspot"
-            elif all(is_cold[-max(2, T // 3):]):
+            elif all(is_cold[-max(2, T // 3) :]):
                 if mk.trend == "decreasing":
                     pattern = "Intensifying Coldspot"
                 elif cold_ratio >= 0.90:
@@ -261,9 +270,13 @@ def emerging_hotspot_analysis(
                 pattern = "Sporadic Coldspot"
         else:
             if prior_hot and hot_ratio >= 0.50:
-                pattern = "Diminishing Hotspot" if mk.trend == "decreasing" else "Historical Hotspot"
+                pattern = (
+                    "Diminishing Hotspot" if mk.trend == "decreasing" else "Historical Hotspot"
+                )
             elif prior_cold and cold_ratio >= 0.50:
-                pattern = "Diminishing Coldspot" if mk.trend == "increasing" else "Historical Coldspot"
+                pattern = (
+                    "Diminishing Coldspot" if mk.trend == "increasing" else "Historical Coldspot"
+                )
             else:
                 pattern = "No Pattern"
 

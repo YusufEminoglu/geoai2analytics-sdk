@@ -20,6 +20,7 @@ class SpatialClusterResult:
     cluster_sizes: dict[int, int]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return point, cluster, and noise counts as a dictionary."""
         return {
             "total_points": self.total_points,
             "num_clusters": self.num_clusters,
@@ -96,7 +97,7 @@ def cluster_spatial_points_dbscan(
     sizes: dict[int, int] = {}
 
     for cl_id in unique_lbls:
-        idx_mask = (labels == cl_id)
+        idx_mask = labels == cl_id
         c_pts = pts[idx_mask]
         mean_x = float(np.mean(c_pts[:, 0]))
         mean_y = float(np.mean(c_pts[:, 1]))

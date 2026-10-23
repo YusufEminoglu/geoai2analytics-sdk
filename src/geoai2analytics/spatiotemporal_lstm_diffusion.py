@@ -24,6 +24,7 @@ class STDiffusionResult:
     forecasted_matrix: list[list[float]]  # (horizon x nodes)
 
     def to_dict(self) -> dict[str, Any]:
+        """Return node count, forecast horizon, and error metrics as a dictionary."""
         return {
             "nodes": self.num_sensor_nodes,
             "horizon_steps": self.forecast_horizon_steps,
@@ -55,7 +56,7 @@ def predict_spatiotemporal_flow(
         for j in range(num_nodes):
             if i != j:
                 d = math.hypot(coords[i][0] - coords[j][0], coords[i][1] - coords[j][1])
-                weight = math.exp(-(d ** 2) / (1000.0 ** 2)) if d < 3000.0 else 0.0
+                weight = math.exp(-(d**2) / (1000.0**2)) if d < 3000.0 else 0.0
                 adj[i][j] = weight
                 row_sum += weight
         if row_sum > 0:

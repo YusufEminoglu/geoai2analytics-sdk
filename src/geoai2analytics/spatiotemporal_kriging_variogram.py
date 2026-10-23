@@ -26,6 +26,7 @@ class STKrigingResult:
     covariance_matrix_condition: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return the kriging estimate, variance, and neighbour count."""
         return {
             "predicted_val": round(self.predicted_value, 3),
             "variance": round(self.kriging_estimation_variance, 4),

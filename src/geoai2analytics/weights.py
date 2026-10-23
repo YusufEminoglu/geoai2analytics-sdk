@@ -19,6 +19,7 @@ class SpatialWeights:
     is_row_standardized: bool = True
 
     def __post_init__(self) -> None:
+        """Validate that the weights matrix has shape (n, n)."""
         if self.matrix.shape != (self.n, self.n):
             raise ValueError(
                 f"Matrix shape {self.matrix.shape} must match (n, n) = ({self.n}, {self.n})"

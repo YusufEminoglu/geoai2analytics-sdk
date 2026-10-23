@@ -25,6 +25,7 @@ class SpatialSurrogateResult:
     geo_embeddings: SpatialEmbeddingMatrix
 
     def to_dict(self) -> dict[str, Any]:
+        """Return fit metrics and embedding dimensionality as a dictionary."""
         return {
             "r_squared": round(self.r_squared, 3),
             "mse": round(self.mean_squared_error, 4),

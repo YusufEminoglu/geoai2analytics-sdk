@@ -13,14 +13,17 @@ class RipleysKCrossResult:
     radius_distances_r: list[float]
     observed_k_cross_values: list[float]
     theoretical_k_csr_values: list[float]  # \pi * r^2
-    besag_l_cross_values: list[float]      # \sqrt{K(r)/\pi} - r
+    besag_l_cross_values: list[float]  # \sqrt{K(r)/\pi} - r
     is_spatial_attraction: bool
     is_spatial_repulsion: bool
 
     def to_dict(self) -> dict[str, Any]:
+        """Return the cross-K summary flags and maximum Besag L value."""
         return {
             "radii_count": len(self.radius_distances_r),
-            "max_l_val": round(max(self.besag_l_cross_values) if self.besag_l_cross_values else 0.0, 3),
+            "max_l_val": round(
+                max(self.besag_l_cross_values) if self.besag_l_cross_values else 0.0, 3
+            ),
             "attraction": self.is_spatial_attraction,
             "repulsion": self.is_spatial_repulsion,
         }
@@ -41,8 +44,6 @@ def calculate_ripleys_k_bivariate(
 
     if n_a == 0 or n_b == 0 or study_area_m2 <= 0:
         return RipleysKCrossResult([], [], [], [], False, False)
-
-    lambda_b = n_b / study_area_m2
 
     step_size = max_radius_r_m / float(radius_steps_count)
     radii = [step_size * (i + 1) for i in range(radius_steps_count)]

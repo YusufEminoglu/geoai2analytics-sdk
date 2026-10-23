@@ -23,6 +23,7 @@ class GEVFitResult:
     return_level_500yr: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return GEV parameters and return levels as a rounded dictionary."""
         return {
             "mu": round(self.location_mu, 3),
             "sigma": round(self.scale_sigma, 3),
@@ -56,7 +57,7 @@ def spatial_gev_fit(annual_maxima: Sequence[float] | np.ndarray) -> GEVFitResult
 
     # Approximation for shape parameter k = -xi (Hosking et al. 1985)
     c = (2.0 / (3.0 + tau3)) - (math.log(2.0) / math.log(3.0))
-    k = 7.8590 * c + 2.9554 * (c ** 2)
+    k = 7.8590 * c + 2.9554 * (c**2)
     xi = -k  # standard sign convention
 
     # Scale sigma and location mu
@@ -72,6 +73,14 @@ def spatial_gev_fit(annual_maxima: Sequence[float] | np.ndarray) -> GEVFitResult
     sigma = max(1e-4, sigma)
 
     def _calc_return_level(return_period_years: float) -> float:
+        """Invert the fitted GEV quantile function for a given return period.
+
+        Args:
+            return_period_years: Return period in years (e.g. 100).
+
+        Returns:
+            Estimated return level for the requested return period.
+        """
         p = 1.0 - 1.0 / return_period_years
         y_p = -math.log(p)
         if abs(xi) > 1e-4:
@@ -103,17 +112,21 @@ def spatial_return_period_map(
     for i in range(n_stations):
         series = matrix[i, :]
         fit = spatial_gev_fit(series)
-        val = fit.return_level_100yr if target_return_years == 100.0 else (
-            fit.return_level_50yr if target_return_years == 50.0 else fit.return_level_10yr
+        val = (
+            fit.return_level_100yr
+            if target_return_years == 100.0
+            else (fit.return_level_50yr if target_return_years == 50.0 else fit.return_level_10yr)
         )
-        results.append({
-            "station_idx": i,
-            "x": coords[i][0],
-            "y": coords[i][1],
-            "return_period_years": target_return_years,
-            "return_level": round(val, 3),
-            "gev_mu": round(fit.location_mu, 3),
-            "gev_sigma": round(fit.scale_sigma, 3),
-        })
+        results.append(
+            {
+                "station_idx": i,
+                "x": coords[i][0],
+                "y": coords[i][1],
+                "return_period_years": target_return_years,
+                "return_level": round(val, 3),
+                "gev_mu": round(fit.location_mu, 3),
+                "gev_sigma": round(fit.scale_sigma, 3),
+            }
+        )
 
     return results

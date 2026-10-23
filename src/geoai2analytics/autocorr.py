@@ -29,6 +29,7 @@ class GlobalMoranResult:
     permutations: int
 
     def summary(self) -> dict[str, Any]:
+        """Return a rounded, human-readable summary of the Moran's I test."""
         return {
             "morans_i": round(self.I, 5),
             "expected_i": round(self.expected_I, 5),
@@ -54,25 +55,31 @@ class LocalMoranResult:
 
     @property
     def high_high_count(self) -> int:
+        """Number of significant High-High (hotspot) spatial units."""
         return int(np.sum(self.quadrants == 1))
 
     @property
     def low_low_count(self) -> int:
+        """Number of significant Low-Low (coldspot) spatial units."""
         return int(np.sum(self.quadrants == 2))
 
     @property
     def low_high_count(self) -> int:
+        """Number of significant Low-High spatial outlier units."""
         return int(np.sum(self.quadrants == 3))
 
     @property
     def high_low_count(self) -> int:
+        """Number of significant High-Low spatial outlier units."""
         return int(np.sum(self.quadrants == 4))
 
     @property
     def not_significant_count(self) -> int:
+        """Number of spatial units without a significant local association."""
         return int(np.sum(self.quadrants == 0))
 
     def summary(self) -> dict[str, Any]:
+        """Return quadrant counts and total units as a dictionary."""
         return {
             "high_high_hotspots": self.high_high_count,
             "low_low_coldspots": self.low_low_count,
@@ -95,14 +102,17 @@ class LocalGetisOrdResult:
 
     @property
     def hotspot_count_99(self) -> int:
+        """Number of spatial units significant at the 99% hot-spot confidence level."""
         return int(np.sum(self.cluster_bins == 3))
 
     @property
     def hotspot_count_95(self) -> int:
+        """Number of hot-spot units significant at the 95% level or higher."""
         return int(np.sum(self.cluster_bins >= 2))
 
     @property
     def coldspot_count_95(self) -> int:
+        """Number of cold-spot units significant at the 95% level or higher."""
         return int(np.sum(self.cluster_bins <= -2))
 
 

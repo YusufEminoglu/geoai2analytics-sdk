@@ -16,6 +16,14 @@ from . import (
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Run the geoai2analytics command line interface.
+
+    Args:
+        argv: Optional argument list (defaults to ``sys.argv[1:]``).
+
+    Returns:
+        Process exit code (0 on success).
+    """
     parser = argparse.ArgumentParser(
         prog="geoai2analytics",
         description="Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine.",

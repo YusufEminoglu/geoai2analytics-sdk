@@ -65,11 +65,13 @@ def skater(
     parent = list(range(n))
 
     def find(u: int) -> int:
+        """Return the representative (root) of the disjoint-set containing ``u``."""
         if parent[u] != u:
             parent[u] = find(parent[u])
         return parent[u]
 
     def union(u: int, v: int) -> bool:
+        """Merge the sets containing ``u`` and ``v``; return True if they were distinct."""
         ru, rv = find(u), find(v)
         if ru != rv:
             parent[ru] = rv

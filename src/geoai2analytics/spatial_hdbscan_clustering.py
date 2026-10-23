@@ -26,6 +26,7 @@ class HDBSCANResult:
     cluster_sizes: dict[int, int]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return cluster counts, noise count, and cluster sizes as a dictionary."""
         return {
             "total_points": self.total_points_count,
             "clusters_count": self.num_clusters,
@@ -100,12 +101,14 @@ def cluster_spatial_hdbscan(
     dsu_size = [1] * n
 
     def find(x: int) -> int:
+        """Return the root of the DSU component containing ``x`` (path-halving)."""
         if dsu_parent[x] == x:
             return x
         dsu_parent[x] = find(dsu_parent[x])
         return dsu_parent[x]
 
     def union(x: int, y: int) -> None:
+        """Union the DSU components containing ``x`` and ``y`` by size."""
         rx, ry = find(x), find(y)
         if rx != ry:
             if dsu_size[rx] < dsu_size[ry]:

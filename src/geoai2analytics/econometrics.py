@@ -35,6 +35,7 @@ class GWRResult:
     covariate_names: list[str] = field(default_factory=list)
 
     def summary(self) -> dict[str, Any]:
+        """Return rounded global fit diagnostics for the GWR model."""
         return {
             "bandwidth": round(self.bandwidth, 2),
             "global_r2": round(self.global_r2, 4),
@@ -160,6 +161,17 @@ class GWR:
         bandwidth: float | None = None,
         covariate_names: list[str] | None = None,
     ) -> None:
+        """Initialize the GWR model, pre-computing the pairwise distance matrix.
+
+        Args:
+            coords: (N, 2) array of spatial coordinates.
+            y: (N,) response vector.
+            X: (N, K) or (N,) covariate matrix; an intercept is added automatically.
+            kernel: Spatial kernel name ('bisquare', 'gaussian', 'exponential', 'binary').
+            adaptive: If True, bandwidth is an adaptive nearest-neighbour count.
+            bandwidth: Optional fixed bandwidth; optimized via AICc when omitted.
+            covariate_names: Optional names for the K covariates.
+        """
         self.coords = np.asarray(coords, dtype=np.float64)
         self.y = np.asarray(y, dtype=np.float64)
         self.raw_X = np.asarray(X, dtype=np.float64)
@@ -181,6 +193,15 @@ class GWR:
         self.dist = np.sqrt(np.sum(diff**2, axis=-1))
 
     def _compute_weights(self, i: int, bw: float) -> np.ndarray:
+        """Build the diagonal kernel weight matrix for observation ``i``.
+
+        Args:
+            i: Index of the focal observation.
+            bw: Bandwidth (adaptive neighbour count or fixed distance).
+
+        Returns:
+            (N, N) diagonal matrix of spatial kernel weights.
+        """
         d_i = self.dist[i]
         if self.adaptive:
             k_int = max(self.k + 2, min(int(round(bw)), self.n - 1))
@@ -201,6 +222,15 @@ class GWR:
         return np.diag(w)
 
     def _fit_single_bw(self, bw: float) -> tuple[np.ndarray, np.ndarray, float]:
+        """Fit local WLS regressions at a given bandwidth.
+
+        Args:
+            bw: Bandwidth to evaluate.
+
+        Returns:
+            Tuple ``(params, y_pred, aicc)`` of local coefficients, fitted
+            values, and the Hurvich AICc criterion value.
+        """
         params = np.zeros((self.n, self.k))
         y_pred = np.zeros(self.n)
         hat_diag = np.zeros(self.n)
@@ -231,6 +261,11 @@ class GWR:
         return params, y_pred, aicc
 
     def optimize_bandwidth(self) -> float:
+        """Find the AICc-optimal bandwidth via golden-section search.
+
+        Returns:
+            Optimal adaptive neighbour count or fixed distance bandwidth.
+        """
         low, high = (
             (self.k + 2, self.n - 1)
             if self.adaptive
@@ -263,6 +298,12 @@ class GWR:
         return float(round((a + b) / 2.0) if self.adaptive else (a + b) / 2.0)
 
     def fit(self) -> GWRResult:
+        """Estimate the local GWR parameters and goodness-of-fit diagnostics.
+
+        Returns:
+            A :class:`GWRResult` with local coefficients, standard errors,
+            t-statistics, local/global R², and information criteria.
+        """
         if self.bandwidth is None:
             self.bandwidth = self.optimize_bandwidth()
 
@@ -327,6 +368,15 @@ class MGWR:
         adaptive: bool = True,
         covariate_names: list[str] | None = None,
     ) -> None:
+        """Initialize the MGWR model, adding an intercept column.
+
+        Args:
+            coords: (N, 2) array of spatial coordinates.
+            y: (N,) response vector.
+            X: (N, K) or (N,) covariate matrix; an intercept is added automatically.
+            adaptive: If True, variable bandwidths are adaptive neighbour counts.
+            covariate_names: Optional names for the K covariates.
+        """
         self.coords = np.asarray(coords, dtype=np.float64)
         self.y = np.asarray(y, dtype=np.float64)
         self.raw_X = np.asarray(X, dtype=np.float64)
@@ -341,6 +391,15 @@ class MGWR:
         )
 
     def fit(self, max_iter: int = 10, tol: float = 1e-3) -> MGWRResult:
+        """Estimate variable-specific bandwidths via iterative backfitting GAM.
+
+        Args:
+            max_iter: Maximum number of backfitting iterations.
+            tol: Convergence tolerance on the maximum parameter change.
+
+        Returns:
+            An :class:`MGWRResult` with local parameters and per-covariate bandwidths.
+        """
         base_gwr = GWR(self.coords, self.y, self.raw_X, adaptive=self.adaptive)
         init_res = base_gwr.fit()
         params = init_res.params.copy()

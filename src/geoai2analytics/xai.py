@@ -28,10 +28,24 @@ class SpatialCrossValidator:
     """Spatial K-Fold Cross-Validator with coordinate clustering to eliminate spatial data leakage."""
 
     def __init__(self, n_splits: int = 5, seed: int = 42) -> None:
+        """Configure the spatial cross-validator.
+
+        Args:
+            n_splits: Number of spatially contiguous folds.
+            seed: Random seed for K-means centre initialization.
+        """
         self.n_splits = n_splits
         self.seed = seed
 
     def split(self, coords: np.ndarray | list[tuple[float, float]]) -> list[SpatialCVFold]:
+        """Partition observations into spatially clustered train/test folds.
+
+        Args:
+            coords: (N, 2) coordinate array.
+
+        Returns:
+            List of :class:`SpatialCVFold` partitions covering all observations.
+        """
         pts = np.asarray(coords, dtype=np.float64)
         n = len(pts)
         k_splits = min(self.n_splits, n)
@@ -76,6 +90,7 @@ class SpatialSHAPResult:
     global_importance: dict[str, float]
 
     def summary(self) -> dict[str, Any]:
+        """Return the base value and feature importance ranking."""
         return {
             "base_value": round(self.base_value, 4),
             "feature_importance_ranking": sorted(
@@ -95,6 +110,15 @@ class SpatialSHAP:
         nsamples: int = 100,
         seed: int = 42,
     ) -> None:
+        """Configure the model-agnostic Kernel SHAP explainer.
+
+        Args:
+            predict_fn: Callable mapping an (N, K) matrix to (N,) predictions.
+            background_data: (M, K) reference sample used to marginalize features.
+            feature_names: Optional feature names; defaults to ``Feature_i``.
+            nsamples: Number of background samples drawn per explanation.
+            seed: Random seed for reproducible sampling.
+        """
         self.predict_fn = predict_fn
         self.background = np.asarray(background_data, dtype=np.float64)
         if self.background.ndim == 1:
@@ -107,6 +131,14 @@ class SpatialSHAP:
         self.base_value = float(np.mean(bg_preds))
 
     def explain(self, X: np.ndarray) -> SpatialSHAPResult:
+        """Compute per-instance SHAP values for each feature.
+
+        Args:
+            X: (N, K) matrix of instances to explain.
+
+        Returns:
+            A :class:`SpatialSHAPResult` with local values and global importances.
+        """
         X_arr = np.asarray(X, dtype=np.float64)
         if X_arr.ndim == 1:
             X_arr = X_arr[:, np.newaxis]
@@ -229,10 +261,24 @@ class ConformalPredictor:
     """Split-Conformal Prediction Interval estimator for spatial machine learning models."""
 
     def __init__(self, alpha: float = 0.10) -> None:
+        """Configure the split-conformal predictor.
+
+        Args:
+            alpha: Miscoverage level; the interval targets ``1 - alpha`` coverage.
+        """
         self.alpha = alpha
         self.q_hat: float = 0.0
 
     def calibrate(self, y_calib: np.ndarray, y_pred_calib: np.ndarray) -> float:
+        """Calibrate the non-conformity quantile on held-out data.
+
+        Args:
+            y_calib: (N,) true calibration targets.
+            y_pred_calib: (N,) model predictions on the calibration set.
+
+        Returns:
+            The conformal quantile ``q_hat`` stored on the predictor.
+        """
         y_true = np.asarray(y_calib, dtype=np.float64)
         y_pred = np.asarray(y_pred_calib, dtype=np.float64)
         n = len(y_true)
@@ -242,6 +288,14 @@ class ConformalPredictor:
         return self.q_hat
 
     def predict_interval(self, y_pred: np.ndarray) -> ConformalPredictionInterval:
+        """Build symmetric prediction intervals around new predictions.
+
+        Args:
+            y_pred: (M,) point predictions.
+
+        Returns:
+            A :class:`ConformalPredictionInterval` with lower/upper bounds.
+        """
         preds = np.asarray(y_pred, dtype=np.float64)
         return ConformalPredictionInterval(
             y_pred=preds,

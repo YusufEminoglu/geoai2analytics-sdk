@@ -20,7 +20,9 @@ class TestGeoAi2AnalyticsRound7(unittest.TestCase):
         pts_a = [(10.0, 10.0), (12.0, 11.0), (100.0, 100.0)]
         pts_b = [(10.5, 10.5), (11.8, 11.2), (101.0, 99.0)]
 
-        res = calculate_ripleys_k_bivariate(pts_a, pts_b, study_area_m2=10000.0, max_radius_r_m=50.0, radius_steps_count=5)
+        res = calculate_ripleys_k_bivariate(
+            pts_a, pts_b, study_area_m2=10000.0, max_radius_r_m=50.0, radius_steps_count=5
+        )
 
         self.assertIsInstance(res, RipleysKCrossResult)
         self.assertEqual(len(res.radius_distances_r), 5)

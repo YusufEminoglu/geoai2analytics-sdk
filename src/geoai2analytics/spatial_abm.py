@@ -24,6 +24,7 @@ class EpidemicSpreadResult:
     final_attack_rate: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return peak and final epidemic trajectory metrics as a dictionary."""
         return {
             "timesteps": self.timesteps,
             "peak_infectious_day": self.peak_infectious_day,
@@ -41,9 +42,19 @@ class SpatialSEIRSimulator:
         zone_coords: Sequence[tuple[float, float]],
         beta_transmission: float = 0.35,
         sigma_incubation: float = 0.20,  # 1/incubation_period (5 days)
-        gamma_recovery: float = 0.10,    # 1/infectious_period (10 days)
-        mobility_rate: float = 0.05,     # Inter-zone daily commuting fraction
+        gamma_recovery: float = 0.10,  # 1/infectious_period (10 days)
+        mobility_rate: float = 0.05,  # Inter-zone daily commuting fraction
     ) -> None:
+        """Initialize the spatial SEIR model and gravity-based mobility matrix.
+
+        Args:
+            zone_populations: Population count per regional zone.
+            zone_coords: (N, 2) coordinates of each zone.
+            beta_transmission: Transmission rate per infectious contact.
+            sigma_incubation: Incubation rate (1 / incubation period).
+            gamma_recovery: Recovery rate (1 / infectious period).
+            mobility_rate: Daily inter-zone commuting fraction.
+        """
         self.populations = np.asarray(zone_populations, dtype=float)
         self.coords = list(zone_coords)
         self.n_zones = len(self.populations)
@@ -57,13 +68,23 @@ class SpatialSEIRSimulator:
         for i in range(self.n_zones):
             for j in range(self.n_zones):
                 if i != j:
-                    dist = max(100.0, math.hypot(self.coords[i][0] - self.coords[j][0], self.coords[i][1] - self.coords[j][1]))
-                    self.mobility_matrix[i, j] = self.populations[j] / (dist ** 1.5)
+                    dist = max(
+                        100.0,
+                        math.hypot(
+                            self.coords[i][0] - self.coords[j][0],
+                            self.coords[i][1] - self.coords[j][1],
+                        ),
+                    )
+                    self.mobility_matrix[i, j] = self.populations[j] / (dist**1.5)
             row_sum = np.sum(self.mobility_matrix[i, :])
             if row_sum > 0:
-                self.mobility_matrix[i, :] = (self.mobility_matrix[i, :] / row_sum) * self.mobility_rate
+                self.mobility_matrix[i, :] = (
+                    self.mobility_matrix[i, :] / row_sum
+                ) * self.mobility_rate
 
-    def simulate(self, initial_infected_zone: int = 0, initial_infected_count: int = 10, days: int = 60) -> EpidemicSpreadResult:
+    def simulate(
+        self, initial_infected_zone: int = 0, initial_infected_count: int = 10, days: int = 60
+    ) -> EpidemicSpreadResult:
         """Run day-by-day spatial ODE/difference step simulation."""
         S = self.populations.copy()
         E = np.zeros(self.n_zones)

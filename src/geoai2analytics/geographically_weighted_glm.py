@@ -23,13 +23,16 @@ class GWGLMResult:
     local_r2_or_pseudo_r2: list[float]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return model family, bandwidth, and global diagnostics as a dictionary."""
         return {
             "model_family": self.model_family,
             "bandwidth_distance": round(self.bandwidth_distance, 2),
             "n_obs": self.n_observations,
             "residual_deviance": round(self.residual_deviance, 3),
             "aic_score": round(self.aic_score, 2),
-            "mean_pseudo_r2": round(float(np.mean(self.local_r2_or_pseudo_r2)), 3) if self.local_r2_or_pseudo_r2 else 0.0,
+            "mean_pseudo_r2": round(float(np.mean(self.local_r2_or_pseudo_r2)), 3)
+            if self.local_r2_or_pseudo_r2
+            else 0.0,
         }
 
 
@@ -104,14 +107,30 @@ def fit_gw_poisson_regression(
 
         # Local McFadden Pseudo R2
         null_mu = max(1e-4, np.sum(w_i * y_arr) / np.sum(w_i))
-        dev_null = 2.0 * np.sum(w_i * (np.where(y_arr > 0, y_arr * np.log(np.maximum(1e-4, y_arr) / null_mu), 0) - (y_arr - null_mu)))
-        dev_res = 2.0 * np.sum(w_i * (np.where(y_arr > 0, y_arr * np.log(np.maximum(1e-4, y_arr) / np.maximum(1e-4, mu)), 0) - (y_arr - mu)))
+        dev_null = 2.0 * np.sum(
+            w_i
+            * (
+                np.where(y_arr > 0, y_arr * np.log(np.maximum(1e-4, y_arr) / null_mu), 0)
+                - (y_arr - null_mu)
+            )
+        )
+        dev_res = 2.0 * np.sum(
+            w_i
+            * (
+                np.where(
+                    y_arr > 0, y_arr * np.log(np.maximum(1e-4, y_arr) / np.maximum(1e-4, mu)), 0
+                )
+                - (y_arr - mu)
+            )
+        )
         pseudo_r2s[i] = max(0.0, min(1.0, 1.0 - (dev_res / max(1e-4, dev_null))))
 
     # Global deviance & AIC
     y_safe = np.maximum(1e-4, y_arr)
     pred_safe = np.maximum(1e-4, y_preds)
-    res_dev = 2.0 * np.sum(np.where(y_arr > 0, y_arr * np.log(y_safe / pred_safe), 0) - (y_arr - y_preds))
+    res_dev = 2.0 * np.sum(
+        np.where(y_arr > 0, y_arr * np.log(y_safe / pred_safe), 0) - (y_arr - y_preds)
+    )
     aic = res_dev + 2.0 * p * n / max(1.0, (n - p - 1.0))
 
     return GWGLMResult(

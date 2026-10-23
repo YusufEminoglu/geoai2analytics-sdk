@@ -35,7 +35,9 @@ class TestGeoAi2AnalyticsRound8(unittest.TestCase):
     def test_multiscale_spatial_entropy(self) -> None:
         # Clustered points (low entropy) vs uniform grid
         pts = [(x * 50.0, y * 50.0) for x in range(6) for y in range(6)]
-        rep = calculate_spatial_information_entropy(pts, scale_grid_resolutions_m=(50.0, 100.0, 200.0))
+        rep = calculate_spatial_information_entropy(
+            pts, scale_grid_resolutions_m=(50.0, 100.0, 200.0)
+        )
 
         self.assertIsInstance(rep, SpatialEntropyReport)
         self.assertEqual(rep.total_features_count, 36)

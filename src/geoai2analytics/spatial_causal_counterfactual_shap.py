@@ -25,6 +25,7 @@ class SpatialShapleyReport:
     recommended_spatial_intervention: str
 
     def to_dict(self) -> dict[str, Any]:
+        """Return prediction, attributions, and counterfactual guidance as a dictionary."""
         return {
             "prediction": round(self.target_prediction, 3),
             "base_value": round(self.base_expected_value, 3),
@@ -53,7 +54,7 @@ def explain_spatial_counterfactual_shap(
 
     for i in range(k):
         val = feature_values[i]
-        name = feature_names[i] if i < len(feature_names) else f"feat_{i+1}"
+        name = feature_names[i] if i < len(feature_names) else f"feat_{i + 1}"
         shap_val = diff * (abs(val) / max(1.0, tot_abs))
         pct = (abs(shap_val) / max(1e-4, abs(diff))) * 100.0
         attrs.append(

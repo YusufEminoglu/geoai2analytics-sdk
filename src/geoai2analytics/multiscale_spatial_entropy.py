@@ -25,6 +25,7 @@ class SpatialEntropyReport:
     scale_profiles: list[ScaleEntropyProfile]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return feature counts and mean entropy as a compact dictionary."""
         return {
             "total_features": self.total_features_count,
             "mean_entropy": round(self.mean_normalized_entropy, 3),

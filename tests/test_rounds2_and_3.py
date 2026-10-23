@@ -36,14 +36,18 @@ class TestGeoAI2AnalyticsRounds2And3(unittest.TestCase):
         self.assertAlmostEqual(sum(huff.expected_patrons_by_destination), 8000.0, delta=10.0)
 
         # Reilly's Law
-        reilly = reilly_law_breaking_point(population_a=100000.0, population_b=400000.0, distance_km=60.0)
+        reilly = reilly_law_breaking_point(
+            population_a=100000.0, population_b=400000.0, distance_km=60.0
+        )
         self.assertIsInstance(reilly, ReillyResult)
         self.assertEqual(reilly.distance_km, 60.0)
         self.assertAlmostEqual(reilly.breaking_point_from_a_km, 20.0, delta=0.5)
 
         # Wilson doubly-constrained flow
         cost_mat = [[5.0, 20.0], [25.0, 10.0]]
-        w_flow = wilson_spatial_interaction(origins_supply=[100.0, 200.0], destinations_demand=[150.0, 150.0], cost_matrix=cost_mat)
+        w_flow = wilson_spatial_interaction(
+            origins_supply=[100.0, 200.0], destinations_demand=[150.0, 150.0], cost_matrix=cost_mat
+        )
         self.assertIsInstance(w_flow, WilsonFlowResult)
         self.assertAlmostEqual(w_flow.total_flow, 300.0, delta=1.0)
 

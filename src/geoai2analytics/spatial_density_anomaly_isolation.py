@@ -26,6 +26,7 @@ class SpatialAnomalyReport:
     sample_anomaly_scores: list[float]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return sample counts, score statistics, and outlier indices."""
         return {
             "evaluated_samples": self.total_samples_evaluated,
             "outliers_count": self.anomalies_detected_count,

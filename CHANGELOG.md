@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+### Changed
+- Added concise docstrings to every public and private function/method, and completed type
+  annotations across the source tree.
+- Expanded `README.md` with accurate installation instructions for the `geo` and `dev`
+  extras, verified usage examples, feature overview, CLI reference, and a complete public
+  API reference.
+- Bumped the minimum NumPy requirement to `1.22` (required by `np.quantile(method=...)`)
+  and the setuptools build requirement to `77` for PEP 639 license metadata.
+
+### Added
+- Edge-case and error-path tests covering weights validation, empty point patterns,
+  constant autocorrelation inputs, GEV sample validation, conformal fallbacks, CLI output,
+  and additional public estimator branches.
+
+### Fixed
+- Removed an unused local variable flagged by Ruff in the bivariate Ripley's K function.
+
 ## [0.12.0] - 2026-08-30
 ### Added
 - **Spatio-Temporal Variogram & 3D Product-Sum Kriging Interpolator (`spatiotemporal_kriging_variogram.py`)**: Added `interpolate_spatiotemporal_kriging` solving space-time non-separable covariance kriging systems.

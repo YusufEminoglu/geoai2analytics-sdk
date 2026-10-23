@@ -29,6 +29,7 @@ class ConformalCoverageReport:
     intervals: list[ConformalInterval]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return coverage level, calibrated quantile, and interval summary."""
         return {
             "confidence_level": self.target_confidence_level,
             "quantile_q": round(self.calibrated_quantile_q, 4),
@@ -87,7 +88,9 @@ def calibrate_spatial_conformal(
             )
         )
 
-    emp_coverage = (covered_cnt / max(1, len(intervals))) if y_test_actual is not None else (1.0 - alpha)
+    emp_coverage = (
+        (covered_cnt / max(1, len(intervals))) if y_test_actual is not None else (1.0 - alpha)
+    )
     mean_w = float(np.mean([it.interval_width for it in intervals])) if intervals else 0.0
 
     return ConformalCoverageReport(

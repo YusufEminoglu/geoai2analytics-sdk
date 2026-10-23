@@ -20,6 +20,7 @@ class UrbanCAGrowthResult:
     expansion_history: list[int]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return growth counters and rate as a compact dictionary."""
         return {
             "initial_urban_cells": self.initial_urban_cells,
             "final_urban_cells": self.final_urban_cells,
@@ -44,9 +45,21 @@ def simulate_urban_growth_ca(
     grid = np.asarray(initial_urban_mask, dtype=np.int32)
     h, w = grid.shape
 
-    slope = np.asarray(slope_resistance_matrix, dtype=np.float64) if slope_resistance_matrix is not None else np.zeros((h, w))
-    road_prox = np.asarray(road_proximity_matrix, dtype=np.float64) if road_proximity_matrix is not None else np.ones((h, w)) * 0.5
-    excluded = np.asarray(exclusion_mask, dtype=np.int32) if exclusion_mask is not None else np.zeros((h, w), dtype=np.int32)
+    slope = (
+        np.asarray(slope_resistance_matrix, dtype=np.float64)
+        if slope_resistance_matrix is not None
+        else np.zeros((h, w))
+    )
+    road_prox = (
+        np.asarray(road_proximity_matrix, dtype=np.float64)
+        if road_proximity_matrix is not None
+        else np.ones((h, w)) * 0.5
+    )
+    excluded = (
+        np.asarray(exclusion_mask, dtype=np.int32)
+        if exclusion_mask is not None
+        else np.zeros((h, w), dtype=np.int32)
+    )
 
     init_cnt = int(np.sum(grid == 1))
     history = [init_cnt]
@@ -82,7 +95,9 @@ def simulate_urban_growth_ca(
                 p_spontaneous = diffusion_coefficient * 0.05 * slope_factor
                 p_breed = breed_coefficient * 0.10 * slope_factor if nb_count >= 2 else 0.0
                 p_spread = spread_coefficient * (nb_count / 8.0) * slope_factor
-                p_road = road_gravity_coefficient * road_factor * slope_factor if nb_count >= 1 else 0.0
+                p_road = (
+                    road_gravity_coefficient * road_factor * slope_factor if nb_count >= 1 else 0.0
+                )
 
                 p_urbanize = max(p_spontaneous, p_breed, p_spread, p_road)
                 p_urbanize = min(1.0, max(0.0, p_urbanize))

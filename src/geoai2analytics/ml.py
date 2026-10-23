@@ -51,6 +51,14 @@ class SpatialRandomForestRegressor:
         min_samples_split: int = 4,
         seed: int = 42,
     ) -> None:
+        """Configure the random forest ensemble.
+
+        Args:
+            n_estimators: Number of bootstrap decision trees.
+            max_depth: Maximum depth of each tree.
+            min_samples_split: Minimum samples required to attempt a split.
+            seed: Random seed for reproducible bagging and feature subsampling.
+        """
         self.n_estimators = n_estimators
         self.max_depth = max_depth
         self.min_samples_split = min_samples_split
@@ -60,6 +68,17 @@ class SpatialRandomForestRegressor:
     def _build_tree(
         self, X: np.ndarray, y: np.ndarray, depth: int, rng: np.random.Generator
     ) -> dict[str, Any]:
+        """Recursively grow a regression tree node using variance-reduction splits.
+
+        Args:
+            X: (N, K) feature matrix for the current node.
+            y: (N,) target values for the current node.
+            depth: Current tree depth.
+            rng: Random generator used for feature subsampling.
+
+        Returns:
+            Nested dictionary describing the node (leaf value or split rule).
+        """
         n, k = X.shape
         if depth >= self.max_depth or n < self.min_samples_split or np.var(y) < 1e-7:
             return {"leaf": True, "value": float(np.mean(y))}
@@ -101,6 +120,15 @@ class SpatialRandomForestRegressor:
         }
 
     def _predict_tree(self, tree: dict[str, Any], x: np.ndarray) -> float:
+        """Traverse a fitted tree for a single observation.
+
+        Args:
+            tree: Root node of a fitted tree dictionary.
+            x: (K,) feature vector.
+
+        Returns:
+            Predicted response value at the reached leaf.
+        """
         if tree["leaf"]:
             return tree["value"]
         if x[tree["feature"]] <= tree["threshold"]:
@@ -139,6 +167,13 @@ class ExplainableBoostingRegressor:
     """Interpretable Generalized Additive Model with Interactions (GA2M)."""
 
     def __init__(self, n_bins: int = 16, learning_rate: float = 0.05, n_rounds: int = 40) -> None:
+        """Configure the explainable boosting machine.
+
+        Args:
+            n_bins: Number of quantile bins per feature.
+            learning_rate: Shrinkage applied to each boosting step.
+            n_rounds: Number of cyclic boosting passes over all features.
+        """
         self.n_bins = n_bins
         self.learning_rate = learning_rate
         self.n_rounds = n_rounds
@@ -147,6 +182,15 @@ class ExplainableBoostingRegressor:
         self.base_score: float = 0.0
 
     def fit(self, X: np.ndarray, y: np.ndarray) -> ExplainableBoostingRegressor:
+        """Fit per-feature shape functions via cyclic gradient boosting.
+
+        Args:
+            X: (N, K) feature matrix.
+            y: (N,) target vector.
+
+        Returns:
+            The fitted estimator (``self``).
+        """
         X_arr = np.asarray(X, dtype=np.float64)
         y_arr = np.asarray(y, dtype=np.float64)
         n, k = X_arr.shape
@@ -179,6 +223,14 @@ class ExplainableBoostingRegressor:
         return self
 
     def predict(self, X: np.ndarray) -> np.ndarray:
+        """Predict responses by summing the learned additive shape functions.
+
+        Args:
+            X: (N, K) feature matrix.
+
+        Returns:
+            (N,) array of predictions.
+        """
         X_arr = np.asarray(X, dtype=np.float64)
         n, k = X_arr.shape
         preds = np.full(n, self.base_score)

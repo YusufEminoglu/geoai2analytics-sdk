@@ -23,6 +23,7 @@ class GravityAccessibilityReport:
     origin_accessibility_scores: list[float]
 
     def to_dict(self) -> dict[str, Any]:
+        """Return a compact dictionary representation of the accessibility report."""
         return {
             "origins_count": self.total_origins_analyzed,
             "mean_accessibility": round(self.mean_accessibility_score, 2),
@@ -31,6 +32,14 @@ class GravityAccessibilityReport:
 
 
 def _gini(scores: Sequence[float]) -> float:
+    """Compute the Gini concentration coefficient of a sequence of scores.
+
+    Args:
+        scores: Non-negative accessibility scores.
+
+    Returns:
+        Gini coefficient in the range [0, 1], or 0.0 for empty/zero-sum input.
+    """
     if not scores:
         return 0.0
     sorted_s = sorted(scores)

@@ -21,6 +21,7 @@ class SpatialMarkovResult:
     p_value_approx: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return transition matrices and steady-state distribution as a dictionary."""
         return {
             "num_classes": self.num_classes,
             "classes": self.class_labels,
@@ -52,7 +53,9 @@ def simulate_landuse_transition(
 
     # Normalize to probabilities
     row_sums = global_counts.sum(axis=1, keepdims=True)
-    global_mat = np.divide(global_counts, row_sums, out=np.zeros_like(global_counts), where=row_sums > 0)
+    global_mat = np.divide(
+        global_counts, row_sums, out=np.zeros_like(global_counts), where=row_sums > 0
+    )
 
     # 2. Spatially Conditioned Transitions
     cond_matrices: dict[str, list[list[float]]] = {}
@@ -66,7 +69,9 @@ def simulate_landuse_transition(
                     cond_counts[state_to_idx[s0], state_to_idx[s1]] += 1.0
 
             c_row_sums = cond_counts.sum(axis=1, keepdims=True)
-            c_mat = np.divide(cond_counts, c_row_sums, out=np.zeros_like(cond_counts), where=c_row_sums > 0)
+            c_mat = np.divide(
+                cond_counts, c_row_sums, out=np.zeros_like(cond_counts), where=c_row_sums > 0
+            )
             cond_matrices[str(lag_st)] = c_mat.tolist()
 
             # Chi-Square discrepancy: \sum (O - E)^2 / E

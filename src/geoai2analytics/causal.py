@@ -37,14 +37,19 @@ class SPSMResult:
     n_control_matched: int
 
     def to_dict(self) -> dict[str, Any]:
+        """Return ATT, balance diagnostics, and sample counts as a dictionary."""
         return {
             "att": round(self.att, 4),
             "att_se": round(self.att_se, 4),
             "att_p_value": round(self.att_p_value, 4),
             "n_treated": self.n_treated,
             "n_control_matched": self.n_control_matched,
-            "covariate_balance_before": {k: round(v, 4) for k, v in self.covariate_balance_before.items()},
-            "covariate_balance_after": {k: round(v, 4) for k, v in self.covariate_balance_after.items()},
+            "covariate_balance_before": {
+                k: round(v, 4) for k, v in self.covariate_balance_before.items()
+            },
+            "covariate_balance_after": {
+                k: round(v, 4) for k, v in self.covariate_balance_after.items()
+            },
         }
 
 
@@ -62,6 +67,7 @@ class SDIDResult:
     p_value: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return direct, spillover, and total treatment effects as a dictionary."""
         return {
             "att_direct": round(self.att_direct, 4),
             "att_spillover": round(self.att_spillover, 4),
@@ -131,7 +137,7 @@ def spatial_propensity_score_matching(
     max_geo_dist = float(np.max(dists)) if np.max(dists) > 0 else 1.0
 
     # 2. Compute covariate balance before matching (Standardized Mean Difference)
-    names = covariate_names or [f"Covariate_{i+1}" for i in range(X.shape[1])]
+    names = covariate_names or [f"Covariate_{i + 1}" for i in range(X.shape[1])]
     smd_before: dict[str, float] = {}
     for p_idx, name in enumerate(names):
         t_vals = X[treated_indices, p_idx]

@@ -21,12 +21,15 @@ class NetKDEResult:
     max_density: float
 
     def to_dict(self) -> dict[str, Any]:
+        """Return bandwidth, kernel, and density statistics as a dictionary."""
         return {
             "bandwidth_m": self.bandwidth_m,
             "kernel_type": self.kernel_type,
             "total_events": self.total_events,
             "max_density": round(self.max_density, 6),
-            "mean_density": round(float(np.mean(self.segment_densities)), 6) if self.segment_densities else 0.0,
+            "mean_density": round(float(np.mean(self.segment_densities)), 6)
+            if self.segment_densities
+            else 0.0,
         }
 
 
@@ -67,7 +70,9 @@ def network_kernel_density_estimation(
                 if kernel == "quartic":
                     d_sum += _quartic_kernel(dist, bandwidth)
                 else:
-                    d_sum += math.exp(-0.5 * (dist / (bandwidth / 3.0)) ** 2) / (bandwidth * math.sqrt(2 * math.pi))
+                    d_sum += math.exp(-0.5 * (dist / (bandwidth / 3.0)) ** 2) / (
+                        bandwidth * math.sqrt(2 * math.pi)
+                    )
         densities[s_idx] = d_sum
 
     max_d = max(densities) if densities else 0.0
