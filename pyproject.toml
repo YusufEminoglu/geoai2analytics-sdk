@@ -12,6 +12,7 @@ authors = [
 description = "Pure-Python Spatial Statistics, Econometrics, ST Kriging & Spatial Isolation Forest Suite."
 readme = "README.md"
 license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.9"
 keywords = [
     "spatial-statistics",

@@ -19,6 +19,11 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 - Removed an unused local variable flagged by Ruff in the bivariate Ripley's K function.
+- `incremental_autocorrelation` built its distance bands from a matrix whose diagonal was
+  `inf`, so the upper bound was always infinite and every band (and the reported peak
+  distance) came out as `nan`/`inf`. The extent now uses finite pairwise distances only.
+- Resolved the remaining mypy findings in `autocorr.py`, `clustering.py` and `xai.py`.
+- Declared `license-files` in `pyproject.toml` and stopped tracking the `.coverage` artifact.
 
 ## [0.12.0] - 2026-08-30
 ### Added

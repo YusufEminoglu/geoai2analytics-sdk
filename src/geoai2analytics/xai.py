@@ -54,7 +54,7 @@ class SpatialCrossValidator:
         init_centers_idx = rng.choice(n, size=k_splits, replace=False)
         centers = pts[init_centers_idx].copy()
 
-        labels = np.zeros(n, dtype=np.int32)
+        labels: np.ndarray = np.zeros(n, dtype=np.int32)
         for _ in range(20):
             diff = pts[:, np.newaxis, :] - centers[np.newaxis, :, :]
             dist = np.sum(diff**2, axis=-1)

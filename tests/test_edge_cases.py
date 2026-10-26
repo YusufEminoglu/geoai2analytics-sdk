@@ -323,3 +323,17 @@ def test_spatial_cross_validator_more_splits_than_points() -> None:
 
     assert len(folds) == 2
     assert all(len(fold.test_indices) >= 1 for fold in folds)
+
+
+def test_incremental_autocorrelation_distances_are_finite() -> None:
+    """Distance bands stay finite and increasing (the inf diagonal must not leak in)."""
+    rng = np.random.default_rng(0)
+    coords = rng.uniform(0.0, 100.0, (40, 2))
+    y = coords[:, 0] + rng.normal(0.0, 5.0, 40)
+
+    result = geoai.incremental_autocorrelation(coords, y, distance_steps=4)
+
+    assert np.all(np.isfinite(result.distances))
+    assert np.all(np.diff(result.distances) > 0)
+    assert np.isfinite(result.peak_distance)
+    assert result.max_z_score > 2.0

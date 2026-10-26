@@ -299,7 +299,7 @@ def local_moran(
     z = y_arr - np.mean(y_arr)
     s2 = np.sum(z**2) / (n - 1)
     if s2 == 0:
-        s2 = 1e-9
+        s2 = np.float64(1e-9)
 
     w_z = weights.lag(z)
     I_i = (z / s2) * w_z
@@ -363,7 +363,7 @@ def local_getis_ord_gi_star(
     x_bar = np.mean(x)
     s = np.std(x)
     if s == 0:
-        s = 1e-9
+        s = np.float64(1e-9)
 
     w_mat = weights.matrix
     w_star = w_mat.copy()
@@ -494,7 +494,7 @@ def local_geary(
     n = len(x)
     s2 = np.var(x)
     if s2 == 0:
-        s2 = 1e-9
+        s2 = np.float64(1e-9)
 
     w_mat = weights.matrix
     c_i = np.zeros(n)
@@ -704,7 +704,8 @@ def incremental_autocorrelation(
     np.fill_diagonal(dist, np.inf)
 
     min_d = float(np.max(np.min(dist, axis=1))) * 1.05
-    max_d = max(min_d * 2.0, float(np.max(dist)) * 0.5)
+    # The diagonal holds inf, so the extent must come from finite pairs only.
+    max_d = max(min_d * 2.0, float(np.max(dist[np.isfinite(dist)])) * 0.5)
     distances = np.linspace(min_d, max_d, distance_steps)
 
     moran_vals = np.zeros(distance_steps)

@@ -223,7 +223,7 @@ def spatial_gmm(
     covs = [np.eye(d) for _ in range(n_components)]
     weights = np.ones(n_components) / n_components
 
-    labels = np.zeros(n, dtype=np.int32)
+    labels: np.ndarray = np.zeros(n, dtype=np.int32)
 
     # EM Algorithm
     for _ in range(max_iter):
