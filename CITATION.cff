@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "Eminoğlu"
+    given-names: "Yusuf"
+    email: "yusufeminoglu@gmail.com"
+    orcid: "https://orcid.org/0009-0005-6000-2934"
+title: "geoai2analytics-sdk"
+version: "0.12.2"
+date-released: "2026-10-26"
+license: "MIT"
+repository-code: "https://github.com/YusufEminoglu/geoai2analytics-sdk"
+url: "https://pypi.org/project/geoai2analytics-sdk/"
+abstract: "Spatial statistics and GeoAI in Python: Moran's I, LISA, Getis-Ord Gi*, GWR/MGWR, spatial regression, kriging and explainable AI."
+keywords:
+  - "spatial-statistics"
+  - "spatial-econometrics"
+  - "geoai"
+  - "gwr"
+  - "mgwr"
+  - "lisa"
+  - "morans-i"
+  - "spatial-autocorrelation"
+  - "shap"
+  - "xai"
+  - "conformal-prediction"
+  - "spatial-weights"
