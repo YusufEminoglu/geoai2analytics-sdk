@@ -110,7 +110,7 @@ The package ships **75+ public algorithms** with a single, consistent NumPy-firs
 ## 💻 Install from Source
 
 ```bash
-git clone https://gitlab.com/geospacephilo/geoai2analytics-sdk.git
+git clone https://github.com/YusufEminoglu/geoai2analytics-sdk.git
 cd geoai2analytics-sdk
 python -m pip install -e ".[dev]"
 ```
@@ -399,6 +399,6 @@ Distributed under the **MIT License**.
   publisher = {Zenodo},
   version   = {0.12.2},
   doi       = {10.5281/zenodo.23677244},
-  url       = {https://gitlab.com/geospacephilo/geoai2analytics-sdk}
+  url       = {https://github.com/YusufEminoglu/geoai2analytics-sdk}
 }
 ```
