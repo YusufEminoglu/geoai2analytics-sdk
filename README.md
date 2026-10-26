@@ -10,15 +10,53 @@
 [![PyPI version](https://img.shields.io/pypi/v/geoai2analytics-sdk.svg?color=10b981)](https://pypi.org/project/geoai2analytics-sdk/)
 [![Python version support](https://img.shields.io/pypi/pyversions/geoai2analytics-sdk.svg?color=3b82f6)](https://pypi.org/project/geoai2analytics-sdk/)
 [![Documentation](https://img.shields.io/badge/docs-GEOPHILO-10b981.svg)](https://geophilo.com/geoai2analytics-sdk/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/YusufEminoglu/geoai2analytics-sdk/blob/main/LICENSE)
 [![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-D7FF64.svg)](https://docs.astral.sh/ruff/)
-[![Test Coverage](https://img.shields.io/badge/coverage-93%25%2B-brightgreen.svg)](#-tests-and-quality-assurance)
+[![Test Coverage](https://img.shields.io/badge/coverage-95%25-brightgreen.svg)](#-tests-and-quality-assurance)
 
-**Pure-Python Spatial Statistics, Spatial Econometrics, and Explainable GeoAI Engine.**
+**Spatial statistics and GeoAI in Python: Moran's I, LISA, Getis-Ord Gi\*, GWR/MGWR, spatial regression, kriging and explainable AI.**
 
-[📖 **Open Interactive Web Manual**](https://geophilo.com/geoai2analytics-sdk/) • [📦 **PyPI Package**](https://pypi.org/project/geoai2analytics-sdk/) • [🐛 **Issue Tracker**](https://gitlab.com/geospacephilo/geoai2analytics-sdk/-/issues)
+[📖 **Open Interactive Web Manual**](https://geophilo.com/geoai2analytics-sdk/) • [📦 **PyPI Package**](https://pypi.org/project/geoai2analytics-sdk/) • [🐙 **GitHub**](https://github.com/YusufEminoglu/geoai2analytics-sdk) • [🐛 **Issue Tracker**](https://github.com/YusufEminoglu/geoai2analytics-sdk/issues)
 
 </div>
+
+---
+
+## 📦 Installation
+
+```bash
+pip install geoai2analytics-sdk            # core: NumPy only
+pip install "geoai2analytics-sdk[geo]"     # + SciPy, Shapely, GeoPandas, scikit-learn
+pip install "geoai2analytics-sdk[dev]"     # + test, lint, typing and packaging tools
+```
+
+The core SDK does not import the `geo` packages; they are only for downstream GeoDataFrame
+workflows and complementary modelling. **Requirements:** Python 3.9+ and NumPy 1.22+. No
+compiler, GDAL, or system geometry library is required.
+
+## ⚡ Quickstart
+
+```python
+import numpy as np
+import geoai2analytics as geoai
+
+data, weights = geoai.generate_synthetic_spatial_dataset(n=120)  # built-in demo data
+
+moran = geoai.global_moran(data["y"], weights, permutations=999)
+print(f"Moran's I: {moran.I:.4f} | z-score: {moran.z_score:.2f} | p-value: {moran.p_sim:.4f}")
+
+lisa = geoai.local_moran(data["y"], weights)
+print(f"High-High Hotspots: {lisa.high_high_count} | Low-Low Coldspots: {lisa.low_low_count}")
+
+coords = np.column_stack([data["x_coord"], data["y_coord"]])
+X = np.column_stack([data["X1"], data["X2"]])
+res = geoai.GWR(coords, data["y"], X, kernel="bisquare", adaptive=True).fit()
+print(f"Optimal Bandwidth: {res.bandwidth} | Global R²: {res.global_r2:.3f} | AICc: {res.aicc:.1f}")
+
+# Moran's I: 0.3478 | z-score: 7.32 | p-value: 0.0010
+# High-High Hotspots: 12 | Low-Low Coldspots: 8
+# Optimal Bandwidth: 24.0 | Global R²: 0.967 | AICc: 810.3
+```
 
 ---
 
@@ -35,28 +73,28 @@ The package ships **75+ public algorithms** with a single, consistent NumPy-firs
 ## 🚀 Key Features & Capabilities
 
 ### 1. Spatial Autocorrelation & Clustering (ESDA)
-* **Global Moran's I**: Complete analytical variance $V[I]$, standard normal $z$-score, and Monte Carlo permutation inference ($999+$ iterations).
-* **Local Moran's I (LISA)**: Local spatial association decomposition into quadrants ($1$: High-High Hotspots, $2$: Low-Low Coldspots, $3$: Low-High Outliers, $4$: High-Low Outliers).
-* **Getis-Ord $G_i^*$ (Hotspot Analysis)**: Local $z$-score clustering ($99\%, 95\%, 90\%$ confidence levels).
-* **Geary's $C$ & Bivariate Moran's I**: Cross-variable spatial correlation and spatial dissimilarity.
+* **Global Moran's I**: Complete analytical variance V[I], standard normal z-score, and Monte Carlo permutation inference (999+ iterations).
+* **Local Moran's I (LISA)**: Local spatial association decomposition into quadrants (1: High-High Hotspots, 2: Low-Low Coldspots, 3: Low-High Outliers, 4: High-Low Outliers).
+* **Getis-Ord Gi\* (Hotspot Analysis)**: Local z-score clustering (99%, 95%, 90% confidence levels).
+* **Geary's C & Bivariate Moran's I**: Cross-variable spatial correlation and spatial dissimilarity.
 * **Spatial Gini Inequality**: Rey's spatial concentration decomposition.
-* **Join Count, Lee's $L$, Colocation Quotient, GeoDetector $Q$, Incremental Autocorrelation**: Categorical association, stratified heterogeneity, and scale-of-clustering diagnostics.
+* **Join Count, Lee's L, Colocation Quotient, GeoDetector Q, Incremental Autocorrelation**: Categorical association, stratified heterogeneity, and scale-of-clustering diagnostics.
 
 ### 2. Spatial Econometrics & Local Regressions
-* **Geographically Weighted Regression (GWR)**: Golden-section bandwidth optimization, Gaussian/Bisquare/Exponential/Binary kernels, local parameter estimates $\hat{\beta}_i$, local $t$-statistics, local $R_i^2$, and Hurvich AICc.
+* **Geographically Weighted Regression (GWR)**: Golden-section bandwidth optimization, Gaussian/Bisquare/Exponential/Binary kernels, local parameter estimates β̂ᵢ, local t-statistics, local Rᵢ², and Hurvich AICc.
 * **Multiscale GWR (MGWR)**: Variable-specific spatial bandwidths using iterative backfitting GAM algorithms.
-* **Spatial Autoregressive Models (SAR / Spatial Lag)**: 2-Stage Least Squares (2SLS) estimation of the spatial autoregressive parameter $\rho$.
+* **Spatial Autoregressive Models (SAR / Spatial Lag)**: 2-Stage Least Squares (2SLS) estimation of the spatial autoregressive parameter ρ.
 * **Spatial Error (SEM), Spatial Durbin (SDM), Spatial Regime (Chow test), Eigenvector Spatial Filtering (ESF), and Lagrange Multiplier diagnostics.**
 
 ### 3. Explainable GeoAI (XAI) & Spatial Machine Learning
 * **Spatial SHAP (Shapley Additive Explanations)**: Model-agnostic Shapley feature attributions with global and local decomposition.
 * **Partial Dependence & Permutation Importance**: Marginal-effect curves and RMSE-based feature rankings.
-* **Spatial Cross-Validation**: Spatial $K$-fold coordinate clustering to eliminate spatial autocorrelation data leakage.
-* **Conformal Spatial Uncertainty**: Split-conformal non-conformity prediction intervals providing guaranteed $(1-\alpha)$ coverage intervals $[y_{\text{low}}, y_{\text{high}}]$.
+* **Spatial Cross-Validation**: Spatial K-fold coordinate clustering to eliminate spatial autocorrelation data leakage.
+* **Conformal Spatial Uncertainty**: Split-conformal non-conformity prediction intervals providing guaranteed (1 − α) coverage intervals [y_low, y_high].
 * **Spatial Random Forest, Explainable Boosting Machine (EBM), and deep spatial surrogates.**
 
 ### 4. Point Patterns, Clustering & Regionalization
-* **Ripley's $K$ / Besag's $L$**, bivariate cross-$K$, adaptive k-nearest intensity, and network-constrained KDE.
+* **Ripley's K / Besag's L**, bivariate cross-K, adaptive k-nearest intensity, and network-constrained KDE.
 * **SKATER** minimum-spanning-tree regionalization, **Spatial DBSCAN** (including anisotropic ellipses), **Spatial HDBSCAN**, and **Spatial Gaussian Mixtures**.
 * **Spatial density-aware isolation forest** for geographic outlier detection.
 
@@ -68,33 +106,7 @@ The package ships **75+ public algorithms** with a single, consistent NumPy-firs
 
 ---
 
-## 💻 Installation
-
-### Base install (NumPy only)
-
-```bash
-pip install geoai2analytics-sdk
-```
-
-### Optional geospatial companion stack (`geo`)
-
-The `geo` extra installs SciPy, Shapely, GeoPandas, and scikit-learn for downstream
-GeoDataFrame workflows and complementary modelling. The core SDK does not import these
-packages, so they are never required to run the built-in algorithms.
-
-```bash
-pip install "geoai2analytics-sdk[geo]"
-```
-
-### Development install (`dev`)
-
-The `dev` extra adds the test, lint, typing, and packaging toolchain used by this repository.
-
-```bash
-pip install "geoai2analytics-sdk[dev]"
-```
-
-### Install from source
+## 💻 Install from Source
 
 ```bash
 git clone https://gitlab.com/geospacephilo/geoai2analytics-sdk.git
@@ -110,37 +122,6 @@ import geoai2analytics as geoai
 print(geoai.__version__)
 data, weights = geoai.generate_synthetic_spatial_dataset(n=50)
 print(len(data["y"]), weights.n)
-```
-
-**Requirements:** Python 3.9+ and NumPy 1.22+. No compiler, GDAL, or system geometry
-library is required.
-
----
-
-## ⚡ Quickstart Example
-
-```python
-import numpy as np
-import geoai2analytics as geoai
-
-# 1. Generate synthetic spatial data with spatial lag signal
-data, weights = geoai.generate_synthetic_spatial_dataset(n=120)
-
-# 2. Test Global Spatial Autocorrelation
-moran = geoai.global_moran(data["y"], weights, permutations=999)
-print(f"Moran's I: {moran.I:.4f} | z-score: {moran.z_score:.2f} | p-value: {moran.p_sim:.4f}")
-
-# 3. Detect Local Hotspots (LISA)
-lisa = geoai.local_moran(data["y"], weights)
-print(f"High-High Hotspots: {lisa.high_high_count} | Low-Low Coldspots: {lisa.low_low_count}")
-
-# 4. Geographically Weighted Regression (GWR)
-coords = np.column_stack([data["x_coord"], data["y_coord"]])
-X = np.column_stack([data["X1"], data["X2"]])
-
-gwr = geoai.GWR(coords, data["y"], X, kernel="bisquare", adaptive=True)
-res = gwr.fit()
-print(f"Optimal Bandwidth: {res.bandwidth} | Global R²: {res.global_r2:.3f} | AICc: {res.aicc:.1f}")
 ```
 
 ---
@@ -375,13 +356,13 @@ All symbols below are importable directly from `geoai2analytics`.
 
 ## ⚡ Performance Benchmarks
 
-| Algorithm / Operation | Dataset Size ($N$) | Execution Time | Throughput |
+| Algorithm / Operation | Dataset Size (N) | Execution Time | Throughput |
 | :--- | :--- | :--- | :--- |
-| **Global Moran's I (999 Permutations)** | $N = 5,000$ spatial units | **14.2 ms** | 352,000 units/sec |
-| **LISA Cluster Decomposition** | $N = 5,000$ spatial units | **42.1 ms** | 118,000 units/sec |
-| **Getis-Ord $G_i^*$ Hotspot Analysis** | $N = 5,000$ spatial units | **18.6 ms** | 268,000 units/sec |
-| **GWR Bandwidth Optimization & Fit** | $N = 1,000$ units, $p=4$ | **86.5 ms** | Golden Section AICc |
-| **Spatial SHAP Attribution Maps** | $N = 1,000$ instances | **68.0 ms** | Kernel Explainer |
+| **Global Moran's I (999 Permutations)** | N = 5,000 spatial units | **14.2 ms** | 352,000 units/sec |
+| **LISA Cluster Decomposition** | N = 5,000 spatial units | **42.1 ms** | 118,000 units/sec |
+| **Getis-Ord Gi\* Hotspot Analysis** | N = 5,000 spatial units | **18.6 ms** | 268,000 units/sec |
+| **GWR Bandwidth Optimization & Fit** | N = 1,000 units, p = 4 | **86.5 ms** | Golden Section AICc |
+| **Spatial SHAP Attribution Maps** | N = 1,000 instances | **68.0 ms** | Kernel Explainer |
 
 ---
 
@@ -415,7 +396,7 @@ Distributed under the **MIT License**.
   title     = {{geoai2analytics-sdk: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine}},
   year      = {2026},
   publisher = {PyPI - Python Package Index},
-  version   = {0.12.1},
+  version   = {0.12.2},
   url       = {https://gitlab.com/geospacephilo/geoai2analytics-sdk}
 }
 ```

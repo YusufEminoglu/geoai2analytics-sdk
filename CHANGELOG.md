@@ -3,7 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+## [0.12.2] - 2026-10-26
 ### Changed
+- PyPI metadata: a plain-language summary, search keywords that match what users look for, and a working issue tracker link (GitHub issues; the GitLab issues page returned 404).
 - Added concise docstrings to every public and private function/method, and completed type
   annotations across the source tree.
 - Expanded `README.md` with accurate installation instructions for the `geo` and `dev`
