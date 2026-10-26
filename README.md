@@ -397,7 +397,7 @@ Distributed under the **MIT License**.
   title     = {{geoai2analytics-sdk: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine}},
   year      = {2026},
   publisher = {Zenodo},
-  version   = {0.12.2},
+  version   = {0.12.3},
   doi       = {10.5281/zenodo.23677244},
   url       = {https://github.com/YusufEminoglu/geoai2analytics-sdk}
 }
