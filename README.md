@@ -8,6 +8,7 @@
 
 
 [![PyPI version](https://img.shields.io/pypi/v/geoai2analytics-sdk.svg?color=10b981)](https://pypi.org/project/geoai2analytics-sdk/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23677244.svg)](https://doi.org/10.5281/zenodo.23677244)
 [![Python version support](https://img.shields.io/pypi/pyversions/geoai2analytics-sdk.svg?color=3b82f6)](https://pypi.org/project/geoai2analytics-sdk/)
 [![Documentation](https://img.shields.io/badge/docs-GEOPHILO-10b981.svg)](https://geophilo.com/geoai2analytics-sdk/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/YusufEminoglu/geoai2analytics-sdk/blob/main/LICENSE)
@@ -395,8 +396,9 @@ Distributed under the **MIT License**.
   author    = {Emino{\u{g}}lu, Yusuf},
   title     = {{geoai2analytics-sdk: Pure-Python Spatial Statistics, Econometrics, and Explainable GeoAI Engine}},
   year      = {2026},
-  publisher = {PyPI - Python Package Index},
+  publisher = {Zenodo},
   version   = {0.12.2},
+  doi       = {10.5281/zenodo.23677244},
   url       = {https://gitlab.com/geospacephilo/geoai2analytics-sdk}
 }
 ```
